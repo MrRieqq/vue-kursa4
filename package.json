@@ -13,6 +13,8 @@
     "axios": "^1.16.0",
     "chart.js": "^4.5.1",
     "cors": "^2.8.6",
+    "embla-carousel-vue": "^8.6.0",
+    "embla-carousel-wheel-gestures": "^8.1.0",
     "express": "^5.2.1",
     "pinia": "^3.0.4",
     "swiper": "^12.1.4",

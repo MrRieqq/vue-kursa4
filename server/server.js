@@ -1,15 +1,21 @@
 import express from 'express'
 import cors from 'cors'
 import axios from 'axios'
+
 const app = express()
+
 app.use(cors())
+
 app.get('/api/skins', async (req, res) => {
     try {
+
         const response = await axios.get(
             'https://market.csgo.com/api/v2/prices/USD.json'
         )
+
         const items =
             Object.values(response.data.items)
+
         const WEAPONS = [
 
             'AK-47',
@@ -41,13 +47,29 @@ app.get('/api/skins', async (req, res) => {
             'SCAR-20',
             'G3SG1'
         ]
+
+        const excluded = [
+
+            'Sticker',
+            'Agent',
+            'Case',
+            'Capsule',
+            'Graffiti',
+            'Patch',
+            'Music Kit',
+            'Souvenir Package',
+            'Pin'
+        ]
+
         const filtered = items.filter(item => {
+
             if (
                 !item.market_hash_name ||
                 !item.price
             ) {
                 return false
             }
+
             const isWeapon =
                 WEAPONS.some(
                     weapon =>
@@ -55,37 +77,36 @@ app.get('/api/skins', async (req, res) => {
                             weapon
                         )
                 )
-            const excluded = [
 
-                'Sticker',
-                'Agent',
-                'Case',
-                'Capsule',
-                'Graffiti',
-                'Patch',
-                'Music Kit',
-                'Souvenir Package',
-                'Pin'
-            ]
             const hasExcluded =
                 excluded.some(word =>
                     item.market_hash_name.includes(word)
                 )
+
             return (
                 isWeapon &&
                 !hasExcluded &&
                 item.market_hash_name.includes('|')
             )
         })
+
         const skins = filtered
             .sort(() => Math.random() - 0.5)
             .slice(0, 40)
             .map((item, index) => {
+                const rarity = getRarity(
+                    item.market_hash_name
+                )
                 const price =
                     Number(item.price)
+
                 const oldPrice =
-                    Number(item.avg_price || price)
+                    Number(
+                        item.avg_price || price
+                    )
+
                 const graph = [
+
                     oldPrice * 0.95,
                     oldPrice * 0.98,
                     oldPrice,
@@ -93,9 +114,11 @@ app.get('/api/skins', async (req, res) => {
                     price * 1.01,
                     price * 1.02,
                     price
+
                 ].map(x =>
                     Number(x.toFixed(2))
                 )
+
                 const diff =
                     (
                         (
@@ -103,60 +126,149 @@ app.get('/api/skins', async (req, res) => {
                             / oldPrice
                         ) * 100
                     ).toFixed(2)
+
                 const percent =
                     diff > 0
                         ? `+${diff}%`
                         : `${diff}%`
+
+                const fullName =
+                    item.market_hash_name
+
+                const weapon =
+                    fullName.split('|')[0]?.trim()
+
+                const skin =
+                    fullName.split('|')[1]
+                        ?.split('(')[0]
+                        ?.trim()
+
                 return {
+
                     id: index,
+
+                    name:
+                    weapon,
+
+                    skin:
+                    skin,
+
                     market_hash_name:
-                    item.market_hash_name,
+                    fullName,
+
+                    quality:
+                        getExterior(
+                            fullName
+                        ),
+
                     exterior:
                         getExterior(
-                            item.market_hash_name
+                            fullName
                         ),
+                    rarity,
+                    price:
+                        price.toFixed(2),
+
                     suggested_price:
-                    price,
+                        price.toFixed(2),
+
                     volume:
                         Number(
                             item.popularity_7d || 0
                         ),
+
                     image:
-                        `https://cdn2.csgo.com/item/image/width=512/${encodeURIComponent(item.market_hash_name)}.webp`,
+                        `https://cdn2.csgo.com/item/image/width=512/${encodeURIComponent(fullName)}.webp`,
+
                     graph,
+
                     percent,
+
                     updated:
-                        'только что'
+                        'только что',
+
+                    inspect:
+                        `https://market.csgo.com/en/${encodeURIComponent(fullName)}`
+
                 }
             })
+
         res.json(skins)
+
     } catch(error) {
+
         console.log(error.message)
+
         res.status(500).json({
             error: error.message
         })
     }
 })
+function getRarity(name) {
+
+    if (
+        name.includes('Consumer')
+    ) {
+        return 'Consumer Grade'
+    }
+
+    if (
+        name.includes('Industrial')
+    ) {
+        return 'Industrial Grade'
+    }
+
+    if (
+        name.includes('Mil-Spec')
+    ) {
+        return 'Mil-Spec'
+    }
+
+    if (
+        name.includes('Restricted')
+    ) {
+        return 'Restricted'
+    }
+    if (
+        name.includes('Classified')
+    ) {
+        return 'Classified'
+    }
+    if (
+        name.includes('Covert')
+    ) {
+        return 'Covert'
+    }
+    return 'Classified'
+}
 function getExterior(name) {
+
     if (
         name.includes('Factory New')
     ) return 'FN'
+
     if (
         name.includes('Minimal Wear')
     ) return 'MW'
+
     if (
         name.includes('Field-Tested')
     ) return 'FT'
+
     if (
         name.includes('Well-Worn')
     ) return 'WW'
+
     if (
         name.includes('Battle-Scarred')
     ) return 'BS'
+
     return 'FN'
 }
+
 app.listen(3001, () => {
+
     console.log(
-        'SERVER STARTED ON 3001'
+        'SERVER STARTED ON PORT 3001'
     )
 })
