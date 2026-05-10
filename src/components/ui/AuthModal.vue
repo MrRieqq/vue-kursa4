@@ -37,7 +37,7 @@
           <span>или войти через</span>
         </div>
         <a
-            href="https://steamcommunity.com/openid/login"
+            href="https://steamcommunity.com/openid/login/"
             target="_blank"
             class="steam-btn"
         >
