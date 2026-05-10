@@ -29,13 +29,9 @@ const chartData = {
   datasets: [
     {
       data: props.prices,
-
       borderColor: '#ff4ecb',
-
       borderWidth: 2,
-
       pointRadius: 0,
-
       tension: 0.4
     }
   ]
@@ -63,5 +59,6 @@ const chartOptions = {
   width: 100%;
   height: 70px;
   margin-top: 20px;
+  pointer-events: none;
 }
 </style>

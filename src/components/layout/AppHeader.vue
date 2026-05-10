@@ -2,41 +2,25 @@
   <header class="navbar">
     <div class="navbar-inner container">
       <div class="logo">
+        <a href="http://localhost:5173">
         <img src="/logo.svg" alt="logo">
+        </a>
       </div>
       <nav class="nav-links">
         <a href="#">Рынок</a>
         <a href="#">Скины</a>
         <a href="#">Аналитика</a>
         <a href="#">Графики</a>
-        <a href="#">FAQ</a>
+        <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
       </nav>
       <div class="nav-right">
-        <input
-            type="text"
-            placeholder="Поиск скина..."
-            class="input-with-icon"
-        >
-        <button
-            class="login-btn"
-            @click="openLogin"
-        >
-          Войти
-        </button>
-
-        <button
-            class="register-btn"
-            @click="openRegister"
-        >
-          Регистрация
-        </button>
+        <input type="text" placeholder="Поиск скина..." class="input-with-icon">
+        <button class="login-btn" @click="openLogin">Войти</button>
+        <button class="register-btn" @click="openRegister">Регистрация</button>
       </div>
     </div>
   </header>
-  <AuthModal
-      v-model="showModal"
-      :mode="modalMode"
-  />
+  <AuthModal v-model="showModal" :mode="modalMode"/>
 </template>
 <style scoped>
 .navbar {
@@ -63,6 +47,7 @@
 .logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .logo img {
   width: 170px;
@@ -86,6 +71,9 @@
 .nav-links a:hover {
   color: #ff4ecb;
   transform: translateY(-1px);
+}
+.active-link {
+  color: #ff4ecb !important;
 }
 .nav-right {
   margin-left: auto;

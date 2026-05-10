@@ -1,5 +1,11 @@
 <template>
-  <div class="skin-card">
+  <div
+      class="skin-card"
+      @click="
+      showModal = true;
+      emit('modal-open')
+      "
+      >
     <div class="top">
       <div class="info">
         <h3>{{ skin.name }}</h3>
@@ -38,14 +44,31 @@
       </span>
     </div>
   </div>
+  <Teleport to="body">
+    <SkinModal
+        :show="showModal"
+        :skin="skin"
+        @close="
+      showModal = false;
+      emit('modal-close')
+    "
+    />
+  </Teleport>
 </template>
 <script setup>
+import { ref } from 'vue'
 import SkinGraph from './SkinGraph.vue'
+import SkinModal from './SkinModal.vue'
+const showModal = ref(false)
 const fallbackImage =
     'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtYQWWlP_HmojxnB7mrxJf5N2x2QXj-hU4j6rDyoDAd1Q8J1sQFrnFvgLoxu7sYwM/360fx360f'
-defineProps({
+const props = defineProps({
   skin: Object
 })
+const emit = defineEmits([
+  'modal-open',
+  'modal-close'
+])
 function getQualityColor(quality) {
   switch(quality) {
     case 'FN':
