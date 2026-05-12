@@ -35,9 +35,18 @@
               </div>
               <div class="info-row">
                 <span>Rarity</span>
-                <div class="rarity">
-                  Covert
-                  <div class="dot"></div>
+                <div
+                    class="rarity"
+                    :style="{
+                    color: skin.rarityColor
+    }"          >
+                  {{ skin.rarity }}
+
+                  <div
+                      class="dot"
+                      :style="{
+                      background: skin.rarityColor
+      }"          ></div>
                 </div>
               </div>
               <div class="info-row">
@@ -49,7 +58,13 @@
           <div class="right">
             <div class="header">
               <div>
-                <h1>{{ skin.name }} | {{ skin.skin }}</h1>
+                <h1
+                    :style="{
+                    color: skin.rarityColor
+                    }"
+                >
+                  {{ skin.name }} | {{ skin.skin }}
+                </h1>
               </div>
             </div>
             <div class="skin-preview">
@@ -392,6 +407,7 @@ onBeforeUnmount(() => {
       rgba(255,77,109,.12);
 }
 .buy-btn {
+  cursor: pointer;
   flex: 1;
   max-width: 320px;
   height: 64px;

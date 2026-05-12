@@ -5,7 +5,43 @@ import axios from 'axios'
 const app = express()
 
 app.use(cors())
+const RARITY_MAP = {
 
+    Consumer: {
+        name: 'Consumer Grade',
+        color: '#b0c3d9'
+    },
+
+    Industrial: {
+        name: 'Industrial Grade',
+        color: '#5e98d9'
+    },
+
+    MilSpec: {
+        name: 'Mil-Spec',
+        color: '#4b69ff'
+    },
+
+    Restricted: {
+        name: 'Restricted',
+        color: '#8847ff'
+    },
+
+    Classified: {
+        name: 'Classified',
+        color: '#d32ce6'
+    },
+
+    Covert: {
+        name: 'Covert',
+        color: '#eb4b4b'
+    },
+
+    Contraband: {
+        name: 'Contraband',
+        color: '#e4ae39'
+    }
+}
 app.get('/api/skins', async (req, res) => {
     try {
 
@@ -94,36 +130,26 @@ app.get('/api/skins', async (req, res) => {
             .sort(() => Math.random() - 0.5)
             .slice(0, 40)
             .map((item, index) => {
+
                 const rarity = getRarity(
                     item.market_hash_name
                 )
+
                 const price =
                     Number(item.price)
 
-                const oldPrice =
+                const median =
                     Number(
-                        item.avg_price || price
+                        item.median_price ||
+                        item.avg_price ||
+                        item.price
                     )
-
-                const graph = [
-
-                    oldPrice * 0.95,
-                    oldPrice * 0.98,
-                    oldPrice,
-                    price * 0.97,
-                    price * 1.01,
-                    price * 1.02,
-                    price
-
-                ].map(x =>
-                    Number(x.toFixed(2))
-                )
 
                 const diff =
                     (
                         (
-                            (price - oldPrice)
-                            / oldPrice
+                            (price - median)
+                            / median
                         ) * 100
                     ).toFixed(2)
 
@@ -143,34 +169,53 @@ app.get('/api/skins', async (req, res) => {
                         ?.split('(')[0]
                         ?.trim()
 
+                /*
+                 * График строится
+                 * вокруг median_price
+                 */
+
+                const graph = [
+
+                    median * 0.94,
+                    median * 0.96,
+                    median * 0.98,
+                    median,
+                    median * 1.01,
+                    median * 1.03,
+                    price
+
+                ].map(x =>
+                    Number(x.toFixed(2))
+                )
+
                 return {
 
                     id: index,
 
-                    name:
-                    weapon,
+                    name: weapon,
 
-                    skin:
-                    skin,
+                    skin: skin,
 
                     market_hash_name:
                     fullName,
 
                     quality:
-                        getExterior(
-                            fullName
-                        ),
+                        getExterior(fullName),
 
                     exterior:
-                        getExterior(
-                            fullName
-                        ),
-                    rarity,
+                        getExterior(fullName),
+
+                    rarity: rarity.name,
+                    rarityColor: rarity.color,
+
                     price:
                         price.toFixed(2),
 
+                    median_price:
+                        median.toFixed(2),
+
                     suggested_price:
-                        price.toFixed(2),
+                        median.toFixed(2),
 
                     volume:
                         Number(
@@ -189,7 +234,6 @@ app.get('/api/skins', async (req, res) => {
 
                     inspect:
                         `https://market.csgo.com/en/${encodeURIComponent(fullName)}`
-
                 }
             })
 
@@ -206,40 +250,42 @@ app.get('/api/skins', async (req, res) => {
 })
 function getRarity(name) {
 
+    const lower =
+        name.toLowerCase()
+
+    /*
+     * Очень грубый,
+     * но рабочий маппинг
+     */
+
     if (
-        name.includes('Consumer')
+        lower.includes('dragon lore') ||
+        lower.includes('howl') ||
+        lower.includes('knife') ||
+        lower.includes('karambit') ||
+        lower.includes('bayonet')
     ) {
-        return 'Consumer Grade'
+        return RARITY_MAP.Covert
     }
 
     if (
-        name.includes('Industrial')
+        lower.includes('asiimov') ||
+        lower.includes('hyper beast') ||
+        lower.includes('vulcan') ||
+        lower.includes('printstream')
     ) {
-        return 'Industrial Grade'
+        return RARITY_MAP.Classified
     }
 
     if (
-        name.includes('Mil-Spec')
+        lower.includes('neo-noir') ||
+        lower.includes('player two') ||
+        lower.includes('mecha industries')
     ) {
-        return 'Mil-Spec'
+        return RARITY_MAP.Restricted
     }
 
-    if (
-        name.includes('Restricted')
-    ) {
-        return 'Restricted'
-    }
-    if (
-        name.includes('Classified')
-    ) {
-        return 'Classified'
-    }
-    if (
-        name.includes('Covert')
-    ) {
-        return 'Covert'
-    }
-    return 'Classified'
+    return RARITY_MAP.MilSpec
 }
 function getExterior(name) {
 

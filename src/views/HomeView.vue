@@ -152,9 +152,9 @@
         </div>
         <div class="footer-column">
           <h4>МАРКЕТ</h4>
-          <a href="#">Продать скины CS2</a>
-          <a href="#">Купить скины CS2</a>
-          <a href="#">Обменять скины CS2</a>
+          <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
+          <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
+          <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
         </div>
         <div class="footer-column">
           <h4>ПОМОЩЬ</h4>

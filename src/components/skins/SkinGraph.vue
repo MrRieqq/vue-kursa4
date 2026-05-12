@@ -7,49 +7,97 @@
   </div>
 </template>
 <script setup>
+import { computed } from 'vue'
+
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement
+  LineElement,
+  Filler
 } from 'chart.js'
+
 import { Line } from 'vue-chartjs'
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement
+    LineElement,
+    Filler
 )
+
 const props = defineProps({
-  prices: Array
+  prices: {
+    type: Array,
+    default: () => []
+  }
 })
-const chartData = {
-  labels: props.prices,
+
+const chartData = computed(() => ({
+
+  labels: props.prices.map(
+      (_, i) => i + 1
+  ),
+
   datasets: [
     {
       data: props.prices,
+
       borderColor: '#ff4ecb',
-      borderWidth: 2,
+
+      backgroundColor:
+          'rgba(255,78,203,0.08)',
+
+      fill: true,
+
+      borderWidth: 2.5,
+
       pointRadius: 0,
-      tension: 0.4
+
+      tension: 0.45
     }
   ]
-}
+}))
+
 const chartOptions = {
+
   responsive: true,
+
   maintainAspectRatio: false,
+
+  animation: false,
+
   plugins: {
     legend: {
       display: false
+    },
+    tooltip: {
+      enabled: false
     }
   },
+
   scales: {
+
     x: {
-      display: false
+      display: false,
+      grid: {
+        display: false
+      }
     },
+
     y: {
-      display: false
+      display: false,
+      grid: {
+        display: false
+      }
+    }
+  },
+
+  elements: {
+    line: {
+      capBezierPoints: true
     }
   }
 }
