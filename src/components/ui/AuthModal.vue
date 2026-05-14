@@ -97,6 +97,45 @@ onBeforeUnmount(() => {
 })
 </script>
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition:
+      opacity .35s ease,
+      transform .35s cubic-bezier(.16,1,.3,1);
+}
+.fade-enter-active .modal,
+.fade-leave-active .modal {
+  transition:
+      transform .35s cubic-bezier(.16,1,.3,1),
+      opacity .35s ease,
+      filter .35s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-from .modal {
+  opacity: 0;
+  transform:
+      scale(.88)
+      translateY(40px);
+
+  filter: blur(12px);
+}
+.fade-enter-to .modal {
+  opacity: 1;
+  transform:
+      scale(1)
+      translateY(0);
+  filter: blur(0);
+}
+.fade-leave-to .modal {
+  opacity: 0;
+  transform:
+      scale(.88)
+      translateY(20px);
+  filter: blur(10px);
+}
 .modal-overlay {
   position: fixed;
   inset: 0;

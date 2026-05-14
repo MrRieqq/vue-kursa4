@@ -17,7 +17,7 @@
         <div class="top-section">
           <div class="left">
             <div class="summary-card">
-              <h3>Summary</h3>
+              <h3>Сводка</h3>
               <div class="float-box">
                 <div class="float-top">
                   <span>Float</span>
@@ -30,23 +30,11 @@
                 </div>
               </div>
               <div class="info-row">
-                <span>Exterior</span>
-                <b>{{ skin.exterior }}</b>
-              </div>
-              <div class="info-row">
                 <span>Rarity</span>
-                <div
-                    class="rarity"
-                    :style="{
-                    color: skin.rarityColor
-    }"          >
-                  {{ skin.rarity }}
+                <div class="rarity">
+                  Covert
 
-                  <div
-                      class="dot"
-                      :style="{
-                      background: skin.rarityColor
-      }"          ></div>
+                  <div class="dot"></div>
                 </div>
               </div>
               <div class="info-row">
@@ -79,7 +67,7 @@
                   target="_blank"
                   class="action-btn"
               >
-                Inspect
+                Осмотреть в игре
               </a>
             </div>
             <div class="bottom-buy">
@@ -98,13 +86,7 @@
                   {{ skin.percent }}
                 </div>
               </div>
-              <a
-                  :href="skin.inspect"
-                  target="_blank"
-                  class="buy-btn"
-              >
-                Add To Cart
-              </a>
+              <router-link to="/skins" class="buy-btn" >Перейти к выбору</router-link>
             </div>
           </div>
         </div>
@@ -178,11 +160,55 @@ onBeforeUnmount(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: .25s ease;
+  transition:
+      opacity .35s ease,
+      transform .35s cubic-bezier(.16,1,.3,1);
 }
+
+.fade-enter-active .modal,
+.fade-leave-active .modal {
+  transition:
+      transform .35s cubic-bezier(.16,1,.3,1),
+      opacity .35s ease,
+      filter .35s ease;
+}
+
+/* overlay */
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* modal open */
+.fade-enter-from .modal {
+  opacity: 0;
+
+  transform:
+      scale(.88)
+      translateY(40px);
+
+  filter: blur(12px);
+}
+
+.fade-enter-to .modal {
+  opacity: 1;
+
+  transform:
+      scale(1)
+      translateY(0);
+
+  filter: blur(0);
+}
+
+/* modal close */
+.fade-leave-to .modal {
+  opacity: 0;
+
+  transform:
+      scale(.88)
+      translateY(20px);
+
+  filter: blur(10px);
 }
 .modal-overlay {
   position: fixed;
@@ -305,13 +331,13 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
+  color: #eb4b4b;
 }
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ff4d6d;
+  background: #eb4b4b;
 }
 .right {
   padding: 24px 28px;

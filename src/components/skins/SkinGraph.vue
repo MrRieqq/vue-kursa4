@@ -19,7 +19,6 @@ import {
 } from 'chart.js'
 
 import { Line } from 'vue-chartjs'
-
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -27,48 +26,33 @@ ChartJS.register(
     LineElement,
     Filler
 )
-
 const props = defineProps({
   prices: {
     type: Array,
     default: () => []
   }
 })
-
 const chartData = computed(() => ({
-
   labels: props.prices.map(
       (_, i) => i + 1
   ),
-
   datasets: [
     {
       data: props.prices,
-
       borderColor: '#ff4ecb',
-
       backgroundColor:
           'rgba(255,78,203,0.08)',
-
       fill: true,
-
       borderWidth: 2.5,
-
       pointRadius: 0,
-
       tension: 0.45
     }
   ]
 }))
-
 const chartOptions = {
-
   responsive: true,
-
   maintainAspectRatio: false,
-
   animation: false,
-
   plugins: {
     legend: {
       display: false
@@ -77,16 +61,13 @@ const chartOptions = {
       enabled: false
     }
   },
-
   scales: {
-
     x: {
       display: false,
       grid: {
         display: false
       }
     },
-
     y: {
       display: false,
       grid: {
@@ -94,7 +75,6 @@ const chartOptions = {
       }
     }
   },
-
   elements: {
     line: {
       capBezierPoints: true

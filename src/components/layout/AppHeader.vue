@@ -8,7 +8,7 @@
       </div>
       <nav class="nav-links">
         <a href="#">Рынок</a>
-        <a href="#">Скины</a>
+        <router-link to="/skins" class="nav-link" active-class="active-link">Скины</router-link>
         <a href="#">Аналитика</a>
         <a href="#">Графики</a>
         <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
@@ -141,6 +141,7 @@
   background:
       rgba(255,78,203,.08);
 }
+
 @media(max-width: 1100px) {
   .nav-links {
     display: none;
