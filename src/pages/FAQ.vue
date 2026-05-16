@@ -91,7 +91,7 @@
         </div>
         <div class="footer-right">
           <div class="footer-selects">
-            <button class="footer-select"><img src="/rub.svg" alt="rub">RUB</button>
+            <button class="footer-select"><img src="/usd.svg" alt="usd">USD</button>
             <button class="footer-select"><img src="/ru.svg" alt="ru">RU</button>
           </div>
           <p>
