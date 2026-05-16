@@ -10,7 +10,7 @@
       <section class="analytics-hero fade-up">
 
         <div class="hero-badge">
-          LIVE MARKET ANALYTICS
+          LIVE MARKET ANALYTICS / ЖИВАЯ АНАЛИТИКА РЫНКА
         </div>
 
         <h1>
@@ -837,7 +837,7 @@ const period = ref('30D')
 }
 
 .analytics {
-  padding-top: 140px;
+  padding-top: 150px;
   padding-bottom: 100px;
 }
 
@@ -853,7 +853,7 @@ const period = ref('30D')
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 42px;
+  height: 38px;
   padding: 0 18px;
   border-radius: 999px;
   background: rgba(255,255,255,.04);

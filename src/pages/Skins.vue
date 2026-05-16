@@ -8,7 +8,7 @@
       <section class="skins-hero fade-up">
 
         <div class="hero-badge">
-          SKINTICK MARKET
+          SKINTICK / СКИНЫ
         </div>
 
         <h1>
@@ -16,8 +16,9 @@
         </h1>
 
         <p>
-          Отслеживайте актуальные цены, тренды,
-          объёмы продаж и динамику рынка в реальном времени.
+          Отслеживайте актуальные цены,
+          тренды и динамику рынка
+          в реальном времени.
         </p>
 
       </section>
@@ -538,7 +539,6 @@ function getCategory(name) {
 }
 
 .skins {
-  padding-top: 140px;
   padding-bottom: 80px;
 }
 
@@ -559,20 +559,32 @@ function getCategory(name) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 42px;
+  height: 38px;
   padding: 0 18px;
+  border: 1px solid rgba(255,78,203,.25);
   border-radius: 999px;
   background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,78,203,.3);
   color: #ff4ecb;
   font-size: 13px;
 }
 
 .skins-hero h1 {
-  margin-top: 90px;
-  font-size: 64px;
+  margin-top: 24px;
+  font-size: 68px;
+  line-height: 1.1;
 }
-
+.skins-page {
+  min-height: 100vh;
+  padding-top: 150px; /* ВОТ ЭТО */
+  background:
+      radial-gradient(
+          circle at top,
+          #501144 0%,
+          #140012 60%
+      );
+  color: white;
+  overflow-x: hidden;
+}
 .skins-hero p {
   margin-top: 20px;
   color: rgba(255,255,255,.6);
@@ -608,19 +620,47 @@ function getCategory(name) {
   width: 100%;
   height: 62px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 2px solid #3C1B37;
   background: rgba(255,255,255,.04);
   color: white;
   padding: 0 22px 0 58px;
   outline: none;
   font-size: 15px;
   backdrop-filter: blur(12px);
+
+  transition:
+      border-color .25s ease,
+      box-shadow .25s ease,
+      background .25s ease;
 }
 
 .search-box input::placeholder {
   color: rgba(255,255,255,.45);
 }
 
+.search-box input:focus {
+  border-color: #ff4ecb;
+
+  box-shadow:
+      0 0 20px rgba(255,78,203,.25);
+
+  background: rgba(255,255,255,.06);
+}
+.search-box img {
+  position: absolute;
+  top: 50%;
+  left: 22px;
+  width: 18px;
+  transform: translateY(-50%);
+  transition: .25s ease;
+}
+
+.search-box:focus-within img {
+  filter:
+      drop-shadow(0 0 6px rgba(255,78,203,.7));
+  transform:
+      translateY(-50%) scale(1.08);
+}
 .toolbar-filters {
   display: flex;
   align-items: center;

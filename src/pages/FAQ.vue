@@ -230,30 +230,58 @@ const toggle = (index) => {
   justify-content: center;
   margin-top: 50px;
 }
+.faq-search {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 .faq-search input {
   width: 100%;
   max-width: 620px;
   height: 62px;
-  padding: 0 24px;
-  border: 1px solid rgba(255,255,255,.08);
+
+  padding: 0 24px 0 58px;
+
+  border: 2px solid #3C1B37;
   border-radius: 22px;
-  background: rgba(255,255,255,.04);
+
+  background:
+      url('/poisk.png') no-repeat 20px center,
+      rgba(255,255,255,.04);
+
+  background-size: 18px;
+
   color: white;
   font-size: 15px;
+
   outline: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+
   transition:
       border-color .25s ease,
       box-shadow .25s ease,
-      background .25s ease;
+      background .25s ease,
+      transform .25s ease;
 }
+
+.faq-search input::placeholder {
+  color: rgba(255,255,255,.45);
+}
+
 .faq-search input:focus {
   border-color: #ff4ecb;
-  background: rgba(255,255,255,.05);
-  box-shadow: 0 0 25px rgba(255,78,203,.18);
-}
-.faq-search input::placeholder {
-  color: rgba(255,255,255,.35);
+
+  background:
+      url('/poisk.png') no-repeat 20px center,
+      rgba(255,255,255,.06);
+
+  background-size: 18px;
+
+  box-shadow:
+      0 0 22px rgba(255,78,203,.25);
+
+  transform: translateY(-1px);
 }
 .faq-grid {
   display: flex;

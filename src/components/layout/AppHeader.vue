@@ -88,7 +88,7 @@
   padding: 0 15px 0 50px;
   border: 2px solid #3C1B37;
   background:
-      url('../../../public/poisk.png') no-repeat 15px center,
+      url('../../../public/posik.svg') no-repeat 15px center,
       rgba(255,255,255,0.03);
   color: white;
   transition:
@@ -103,6 +103,7 @@
   box-shadow:
       0 0 20px rgba(255,78,203,.25);
 }
+
 .nav-right button {
   height: 44px;
   padding: 0 24px;
