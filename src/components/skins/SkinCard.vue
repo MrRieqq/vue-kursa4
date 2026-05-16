@@ -37,7 +37,7 @@
 <script setup>
 import { ref } from 'vue'
 import SkinGraph from './SkinGraph.vue'
-import SkinModal from './SkinModal.vue'
+import SkinModal from '../ui/SkinModal.vue'
 const showModal = ref(false)
 const fallbackImage =
     'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtYQWWlP_HmojxnB7mrxJf5N2x2QXj-hU4j6rDyoDAd1Q8J1sQFrnFvgLoxu7sYwM/360fx360f'
