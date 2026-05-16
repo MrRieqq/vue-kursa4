@@ -7,9 +7,8 @@
         </a>
       </div>
       <nav class="nav-links">
-        <router-link to="/market" class="nav-link" active-class="active-link">Рынок</router-link>
         <router-link to="/skins" class="nav-link" active-class="active-link">Скины</router-link>
-        <a href="#">Аналитика</a>
+        <router-link to="/analytics" class="nav-link" active-class="active-link">Аналитика</router-link>
         <a href="#">Графики</a>
         <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
       </nav>

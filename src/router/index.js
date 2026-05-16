@@ -18,9 +18,9 @@ const router = createRouter({
             component: FAQ,
         },
         {
-            path: '/market',
-            name: 'market',
-            component: () => import('@/pages/Market.vue')
+            path: '/analytics',
+            name: 'analytics',
+            component: () => import('@/pages/Analytics.vue')
         },
         {
             path: '/skins',
