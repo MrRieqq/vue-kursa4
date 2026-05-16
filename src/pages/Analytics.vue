@@ -178,7 +178,7 @@
             <div>
 
               <strong>
-                AWP Dragon Lore
+                AWP | Dragon Lore
               </strong>
 
               <p>
@@ -198,7 +198,7 @@
             <div>
 
               <strong>
-                AK-47 Vulcan
+                AK-47 | Vulcan
               </strong>
 
               <p>
@@ -218,7 +218,7 @@
             <div>
 
               <strong>
-                M4A4 Howl
+                M4A4 | Howl
               </strong>
 
               <p>
@@ -232,15 +232,9 @@
             </div>
 
           </div>
-
         </div>
-
-        <!-- BIGGEST DROP -->
-
         <div class="market-card">
-
           <div class="market-header">
-
             <h3>
               <img src="/drop_graph.svg"> Самое большое падение
             </h3>
@@ -256,7 +250,7 @@
             <div>
 
               <strong>
-                Glock Fade
+                Glock | Fade
               </strong>
 
               <p>
@@ -276,7 +270,7 @@
             <div>
 
               <strong>
-                USP-S Kill Confirmed
+                USP-S | Kill Confirmed
               </strong>
 
               <p>
@@ -296,7 +290,7 @@
             <div>
 
               <strong>
-                Desert Eagle Blaze
+                Desert Eagle | Blaze
               </strong>
 
               <p>
@@ -334,32 +328,32 @@
         <div class="heatmap-grid">
 
           <div class="heat-card green">
-            <span>Rifles</span>
+            <span>Винтовки</span>
             <strong>+12%</strong>
           </div>
 
           <div class="heat-card red">
-            <span>Pistols</span>
+            <span>Пистолеты</span>
             <strong>-4%</strong>
           </div>
 
           <div class="heat-card green">
-            <span>Knives</span>
+            <span>Ножи</span>
             <strong>+21%</strong>
           </div>
 
           <div class="heat-card green">
-            <span>Gloves</span>
+            <span>Перчатки</span>
             <strong>+9%</strong>
           </div>
 
           <div class="heat-card red">
-            <span>SMG</span>
+            <span>Дробовики и ПП</span>
             <strong>-2%</strong>
           </div>
 
           <div class="heat-card green">
-            <span>Stickers</span>
+            <span>Наклейки</span>
             <strong>+15%</strong>
           </div>
 
@@ -367,7 +361,7 @@
 
       </section>
 
-      <!-- AI PREDICTION -->
+
 
       <section class="ai-section fade-up delay-5">
 
@@ -376,7 +370,7 @@
           <div class="ai-glow"></div>
 
           <span>
-            AI Prediction
+            ИИ Предсказание
           </span>
 
           <h2>
