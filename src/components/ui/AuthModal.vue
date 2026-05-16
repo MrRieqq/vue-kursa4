@@ -16,19 +16,9 @@
           }}
         </p>
         <form class="auth-form">
-          <input
-              v-if="!isLogin"
-              type="text"
-              placeholder="Ваш ник"
-          >
-          <input
-              type="email"
-              placeholder="Email"
-          >
-          <input
-              type="password"
-              placeholder="Пароль"
-          >
+          <input v-if="!isLogin" type="text" placeholder="Ваш ник">
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Пароль">
           <button type="submit" class="submit-btn">
             {{ isLogin ? 'Войти' : 'Создать аккаунт' }}
           </button>
@@ -36,22 +26,10 @@
         <div class="divider">
           <span>или войти через</span>
         </div>
-        <a
-            href="https://steamcommunity.com/openid/login/"
-            target="_blank"
-            class="steam-btn"
-        >
-          <img src="/steam.svg" alt="Steam">
-          Steam
-        </a>
+        <a href="https://steamcommunity.com/openid/login/" target="_blank" class="steam-btn"><img src="/steam.svg" alt="Steam">Steam</a>
         <div class="switch-text">
-          <span>
-            {{ isLogin ? 'Нет аккаунта?' : 'Уже есть аккаунт?' }}
-          </span>
-          <button
-              class="switch-btn"
-              @click="isLogin = !isLogin"
-          >
+          <span>{{ isLogin ? 'Нет аккаунта?' : 'Уже есть аккаунт?' }}</span>
+          <button class="switch-btn" @click="isLogin = !isLogin">
             {{ isLogin ? 'Зарегистрироваться' : 'Войти' }}
           </button>
         </div>

@@ -2,7 +2,7 @@
   <div class="app">
     <AppHeader />
     <main class="hero container">
-      <section class="hero-content">
+      <section class="hero-content fade-up">
         <h1>
           Не знаешь реальную цену скина?<br>
           <span>SkinTick</span>
@@ -12,7 +12,7 @@
           Актуальные цены, графики и аналитика рынка CS2 в реальном времени
         </p>
       </section>
-      <section class="features">
+      <section class="features fade-up delay-1">
         <div class="feature-card">
           <img src="/hours.svg"> Обновление цен каждые 10 минут
         </div>
@@ -26,7 +26,7 @@
           <img src="/graph.svg"> История цен и тренды
         </div>
       </section>
-      <section class="skins-section">
+      <section class="skins-section fade-up delay-2">
         <div v-if="loading" class="loading">
           Загрузка скинов...
         </div>
@@ -35,9 +35,9 @@
             :skins="skins"
         />
       </section>
-      <section class="stats-section">
+      <section class="stats-section fade-up delay-3">
         <div class="stats-grid">
-          <div class="stat-card">
+          <div class="stat-card fade-up delay-1">
             <div class="stat-top">
               <img src="/graph.svg" alt="">
               <span>Рыночная сводка</span>
@@ -45,7 +45,7 @@
             <h2>$ 2,847,653</h2>
             <p>Общий объем рынка</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card fade-up delay-2">
             <div class="stat-top">
               <img src="/box.svg" alt="">
               <span>Активных скинов на продаже</span>
@@ -53,7 +53,7 @@
             <h2>1,245,672</h2>
             <p>Отслеживается</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card fade-up delay-3">
             <div class="stat-top">
               <img src="/update.svg" alt="">
               <span>Обновлений сегодня</span>
@@ -61,7 +61,7 @@
             <h2>8,642,112</h2>
             <p>Последнее обновление 2 мин. назад</p>
           </div>
-          <div class="stat-card">
+          <div class="stat-card fade-up delay-4">
             <div class="stat-top">
               <img src="/server.svg" alt="">
               <span>Площадки</span>
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="bottom-features">
-          <div class="feature-box">
+          <div class="feature-box fade-up delay-1">
             <div class="feature-icon">
               <img src="/fire.svg" alt="">
             </div>
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="divider"></div>
-          <div class="feature-box">
+          <div class="feature-box fade-up delay-1">
             <div class="feature-icon">
               <img src="/update.svg">
             </div>
@@ -97,7 +97,7 @@
             </div>
           </div>
           <div class="divider"></div>
-          <div class="feature-box">
+          <div class="feature-box fade-up delay-1">
             <div class="feature-icon">
               <img src="/graph.svg" alt="">
             </div>
@@ -110,7 +110,7 @@
             </div>
           </div>
           <div class="divider"></div>
-          <div class="feature-box">
+          <div class="feature-box fade-up delay-1">
             <div class="feature-icon">
               <img src="/kolokol.svg" alt="">
             </div>
@@ -208,7 +208,6 @@ const { skins, loading } =
     storeToRefs(skinStore)
 onMounted(() => {
   skinStore.startAutoUpdate()
-
 })
 </script>
 <style scoped>
@@ -221,7 +220,6 @@ onMounted(() => {
 }
 .stats-section {
   padding: 40px;
-
 }
 .stats-grid {
   display: grid;
@@ -349,6 +347,29 @@ onMounted(() => {
 }
 .divider {
   display: none;
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp .8s ease forwards;
+}
+.delay-1 {
+  animation-delay: .15s;
+}
+.delay-2 {
+  animation-delay: .3s;
+}
+.delay-3 {
+  animation-delay: .45s;
+}
+.delay-4 {
+  animation-delay: .6s;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .app {
   min-height: 100vh;

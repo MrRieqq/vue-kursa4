@@ -2,10 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import FAQ from '../pages/FAQ.vue'
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-
     routes: [
         {
             path: '/',
@@ -18,11 +16,15 @@ const router = createRouter({
             component: FAQ,
         },
         {
+            path: '/analytics',
+            name: 'analytics',
+            component: () => import('@/pages/Analytics.vue')
+        },
+        {
             path: '/skins',
             name: 'skins',
             component: () => import('@/pages/Skins.vue')
         }
     ],
 })
-
 export default router

@@ -1,19 +1,8 @@
 <template>
   <transition name="fade">
-    <div
-        v-if="show"
-        class="modal-overlay"
-        @click.self="close"
-    >
+    <div v-if="show" class="modal-overlay" @click.self="close">
       <div class="modal">
-
-        <button
-            class="close-btn"
-            @click="close"
-        >
-          ✕
-        </button>
-
+        <button class="close-btn" @click="close">✕</button>
         <div class="top-section">
           <div class="left">
             <div class="summary-card">
@@ -33,7 +22,6 @@
                 <span>Rarity</span>
                 <div class="rarity">
                   Covert
-
                   <div class="dot"></div>
                 </div>
               </div>
@@ -49,26 +37,16 @@
                 <h1
                     :style="{
                     color: skin.rarityColor
-                    }"
-                >
+                    }">
                   {{ skin.name }} | {{ skin.skin }}
                 </h1>
               </div>
             </div>
             <div class="skin-preview">
-              <img
-                  :src="skin.image"
-                  :alt="skin.market_hash_name"
-              >
+              <img :src="skin.image" :alt="skin.market_hash_name">
             </div>
             <div class="actions">
-              <a
-                  :href="skin.inspect"
-                  target="_blank"
-                  class="action-btn"
-              >
-                Осмотреть в игре
-              </a>
+              <a :href="skin.inspect" target="_blank" class="action-btn">Осмотреть в игре</a>
             </div>
             <div class="bottom-buy">
               <div class="price-wrapper">
@@ -81,8 +59,7 @@
                     skin.percent.includes('-')
                     ? 'red'
                     : 'green'
-                  "
-                >
+                  ">
                   {{ skin.percent }}
                 </div>
               </div>
@@ -164,7 +141,6 @@ onBeforeUnmount(() => {
       opacity .35s ease,
       transform .35s cubic-bezier(.16,1,.3,1);
 }
-
 .fade-enter-active .modal,
 .fade-leave-active .modal {
   transition:
@@ -172,42 +148,29 @@ onBeforeUnmount(() => {
       opacity .35s ease,
       filter .35s ease;
 }
-
-/* overlay */
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
-
-/* modal open */
 .fade-enter-from .modal {
   opacity: 0;
-
   transform:
       scale(.88)
       translateY(40px);
-
   filter: blur(12px);
 }
-
 .fade-enter-to .modal {
   opacity: 1;
-
   transform:
       scale(1)
       translateY(0);
-
   filter: blur(0);
 }
-
-/* modal close */
 .fade-leave-to .modal {
   opacity: 0;
-
   transform:
       scale(.88)
       translateY(20px);
-
   filter: blur(10px);
 }
 .modal-overlay {

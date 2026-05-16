@@ -1,11 +1,5 @@
 <template>
-  <div
-      class="skin-card"
-      @click="
-      showModal = true;
-      emit('modal-open')
-      "
-      >
+  <div class="skin-card" @click="showModal = true;emit('modal-open')">
     <div class="top">
       <div class="info">
         <h3>{{ skin.name }}</h3>
@@ -16,15 +10,13 @@
           :style="{
             borderColor: getQualityColor(skin.quality),
             color: getQualityColor(skin.quality)
-          }"
-      >
+          }">
         {{ skin.quality }}
       </span>
     </div>
     <img
         :src="skin.image || fallbackImage"
-        :alt="skin.name"
-    />
+        :alt="skin.name"/>
     <SkinGraph :prices="skin.graph" />
     <div class="bottom">
       <div>
@@ -33,26 +25,13 @@
           {{ skin.updated }}
         </small>
       </div>
-      <span
-          :class="
-            skin.percent.includes('-')
-            ? 'red'
-            : 'green'
-          "
-      >
+      <span :class="skin.percent.includes('-')? 'red': 'green'">
         {{ skin.percent }}
       </span>
     </div>
   </div>
   <Teleport to="body">
-    <SkinModal
-        :show="showModal"
-        :skin="skin"
-        @close="
-      showModal = false;
-      emit('modal-close')
-    "
-    />
+    <SkinModal :show="showModal" :skin="skin" @close="showModal = false;emit('modal-close')"/>
   </Teleport>
 </template>
 <script setup>

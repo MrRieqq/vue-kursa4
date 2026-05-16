@@ -1,7 +1,118 @@
+<template>
+  <div class="faq-page">
+    <AppHeader />
+    <main class="faq container">
+      <section class="faq-hero fade-up">
+        <span class="faq-badge">FAQ / ПОМОЩЬ</span>
+        <h1>Часто задаваемые вопросы</h1>
+        <p>
+          Всё что нужно знать о работе SkinTick,
+          покупке, продаже и аналитике скинов CS2.
+        </p>
+      </section>
+      <section class="faq-search fade-up delay-1">
+        <input type="text" placeholder="Поиск вопроса...">
+      </section>
+      <section class="faq-grid fade-up delay-2">
+        <div
+            class="faq-card fade-up"
+            v-for="(item, index) in faqItems"
+            :key="index"
+            :style="{
+            animationDelay: `${index * 0.08}s`
+          }">
+          <button class="faq-question" @click="toggle(index)">
+            <span>
+              {{ item.question }}
+            </span>
+            <div
+                class="faq-icon"
+                :class="{ active: item.open }">
+              +
+            </div>
+          </button>
+          <transition name="faq">
+            <div
+                v-if="item.open"
+                class="faq-answer">
+              {{ item.answer }}
+            </div>
+          </transition>
+        </div>
+      </section>
+      <section class="faq-bottom fade-up delay-3">
+        <div class="support-box">
+          <div>
+            <h2>Не нашли ответ?</h2>
+            <p>Наша поддержка поможет решить любой вопрос.</p>
+          </div>
+          <button @click="showSupportModal = true">Написать в поддержку</button>
+        </div>
+      </section>
+    </main>
+    <div class="line"></div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="/logo.svg" alt="SkinTick">
+          <p>
+            Актуальные цены, графики
+            и аналитика рынка CS2
+            в реальном времени
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.tiktok.com/@lolke17"><img src="/tiktok.svg" alt=""></a>
+            <a href="https://www.youtube.com/@lol-iz1rs"><img src="/youtube.svg" alt=""></a>
+            <a href="https://vk.com/kripo43k"><img src="/vk.svg" alt=""></a>
+            <a href="https://t.me/invo_bankai"><img src="/tg.svg" alt=""></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>МАРКЕТ</h4>
+          <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
+          <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
+          <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
+        </div>
+        <div class="footer-column">
+          <h4>ПОМОЩЬ</h4>
+          <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
+          <a href="#">Как продать все скины CS2 в стиме сразу</a>
+          <a href="#">Как это работает</a>
+          <a href="#">Гарантии</a>
+          <a href="#">Контакты</a>
+        </div>
+        <div class="footer-column">
+          <h4>ПОЛЕЗНОЕ</h4>
+          <a href="#">Блог</a>
+          <a href="#">Отзывы о нас</a>
+          <a href="#">Пользовательское соглашение</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">API</a>
+        </div>
+        <div class="footer-right">
+          <div class="footer-selects">
+            <button class="footer-select"><img src="/rub.svg" alt="rub">RUB</button>
+            <button class="footer-select"><img src="/ru.svg" alt="ru">RU</button>
+          </div>
+          <p>
+            Веб-сайт SkinTick управляется компанией
+            Ин-Гейм Солюшн ЛТД.
+          </p>
+          <span>
+                © 2017-2026 SkinTick, все права защищены<br>
+                Powered by Steam. Not affiliated with Valve Corp.
+          </span>
+        </div>
+      </div>
+    </footer>
+    <SupportModal v-model="showSupportModal" />
+  </div>
+</template>
 <script setup>
 import { ref } from 'vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import SupportModal from '@/components/ui/SupportModal.vue'
+const showSupportModal = ref(false)
 const faqItems = ref([
   {
     question: 'Как часто обновляются цены?',
@@ -34,166 +145,32 @@ const faqItems = ref([
     open: false
   }
 ])
-const showSupportModal = ref(false)
 const toggle = (index) => {
-  faqItems.value[index].open = !faqItems.value[index].open
+  faqItems.value[index].open =
+      !faqItems.value[index].open
 }
 </script>
-<template>
-    <AppHeader />
-    <main class="faq container">
-      <section class="faq-hero">
-        <span class="faq-badge">
-          FAQ / ПОМОЩЬ
-        </span>
-        <h1>
-          Часто задаваемые вопросы
-        </h1>
-        <p>
-          Всё что нужно знать о работе SkinTick,
-          покупке, продаже и аналитике скинов CS2.
-        </p>
-      </section>
-      <section class="faq-search">
-        <input
-            type="text"
-            placeholder="Поиск вопроса..."
-        >
-      </section>
-      <section class="faq-grid">
-        <div class="faq-card" v-for="(item, index) in faqItems" :key="index">
-          <button
-              class="faq-question"
-              @click="toggle(index)"
-          >
-            <span>{{ item.question }}</span>
-            <div
-                class="faq-icon"
-                :class="{ active: item.open }"
-            >
-              +
-            </div>
-          </button>
-          <transition name="faq">
-            <div
-                v-if="item.open"
-                class="faq-answer"
-            >
-              {{ item.answer }}
-            </div>
-          </transition>
-        </div>
-      </section>
-      <section class="faq-bottom">
-        <div class="support-box">
-          <div>
-            <h2>
-              Не нашли ответ?
-            </h2>
-            <p>
-              Наша поддержка поможет решить любой вопрос.
-            </p>
-          </div>
-          <button @click="showSupportModal = true">
-            Написать в поддержку
-          </button>
-        </div>
-      </section>
-    </main>
-  <div class="line">
-  </div>
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <img src="/logo.svg" alt="SkinTick">
-        <p>
-          Актуальные цены, графики
-          и аналитика рынка CS2
-          в реальном времени
-        </p>
-        <div class="footer-socials">
-          <a href="https://www.tiktok.com/@lolke17">
-            <img src="/tiktok.svg" alt="">
-          </a>
-          <a href="https://www.youtube.com/@lol-iz1rs">
-            <img src="/youtube.svg" alt="">
-          </a>
-          <a href="https://vk.com/kripo43k">
-            <img src="/vk.svg" alt="">
-          </a>
-          <a href="https://t.me/invo_bankai">
-            <img src="/tg.svg" alt="">
-          </a>
-        </div>
-      </div>
-      <div class="footer-column">
-        <h4>МАРКЕТ</h4>
-        <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
-        <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
-        <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
-      </div>
-      <div class="footer-column">
-        <h4>ПОМОЩЬ</h4>
-        <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
-        <a href="#">Как продать все скины CS2 в стиме сразу</a>
-        <a href="#">Как это работает</a>
-        <a href="#">Гарантии</a>
-        <a href="#">Контакты</a>
-      </div>
-      <div class="footer-column">
-        <h4>ПОЛЕЗНОЕ</h4>
-        <a href="#">Блог</a>
-        <a href="#">Отзывы о нас</a>
-        <a href="#">Пользовательское соглашение</a>
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">API</a>
-      </div>
-      <div class="footer-right">
-        <div class="footer-selects">
-          <button class="footer-select">
-            <img src="/rub.svg" alt="rub">
-            RUB
-          </button>
-          <button class="footer-select">
-            <img src="/ru.svg" alt="ru">
-            RU
-          </button>
-        </div>
-        <p>
-          Веб-сайт SkinTick управляется компанией Ин-Гейм
-          Солюшн ЛТД.
-        </p>
-        <span>
-        © 2017-2026 SkinTick, все права защищены<br>
-        Powered by Steam. Not affiliated with Valve Corp.
-      </span>
-      </div>
-    </div>
-  </footer>
-  <SupportModal v-model="showSupportModal" />
-</template>
 <style scoped>
-.nav-links a:hover {
-  color: #ff4ecb;
-  transform: translateY(-1px);
-}
-.active-link {
-  color: #ff4ecb !important;
-}
 .faq-page {
   min-height: 100vh;
-  background: radial-gradient(circle at center, #5f1b56 0%, #140012 65%);
+  padding-top: 150px;
+  background:
+      radial-gradient(
+          circle at top,
+          #501144 0%,
+          #140012 60%
+      );
   color: white;
+  overflow-x: hidden;
 }
-.line {
+.container {
   width: 100%;
-  max-width: 1920px;
+  max-width: 1700px;
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, .06);
-  border-radius: 32px;
+  padding: 0 40px;
 }
 .faq {
-  padding: 150px 0 80px;
+  padding-bottom: 80px;
 }
 .faq-hero {
   max-width: 760px;
@@ -211,49 +188,55 @@ const toggle = (index) => {
   background: rgba(255,255,255,.04);
   color: #ff4ecb;
   font-size: 13px;
-  letter-spacing: .08em;
 }
 .faq-hero h1 {
   margin-top: 24px;
-  font-size: 58px;
+  font-size: 64px;
   line-height: 1.1;
-  font-weight: 700;
 }
 .faq-hero p {
-  margin-top: 18px;
-  color: rgba(255,255,255,.55);
-  font-size: 17px;
+  margin-top: 20px;
+  color: rgba(255,255,255,.6);
   line-height: 1.6;
 }
 .faq-search {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 55px;
 }
 .faq-search input {
   width: 100%;
   max-width: 620px;
   height: 62px;
-  padding: 0 24px;
-  border: 1px solid rgba(255,255,255,.08);
+  padding: 0 24px 0 58px;
+  border: 2px solid #3C1B37;
   border-radius: 22px;
-  background: rgba(255,255,255,.04);
+  background:
+      url('/poisk.png') no-repeat 20px center,
+      rgba(255,255,255,.04);
+  background-size: 18px;
   color: white;
   font-size: 15px;
   outline: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   transition:
       border-color .25s ease,
       box-shadow .25s ease,
-      background .25s ease;
+      background .25s ease,
+      transform .25s ease;
+}
+.faq-search input::placeholder {
+  color: rgba(255,255,255,.45);
 }
 .faq-search input:focus {
   border-color: #ff4ecb;
-  background: rgba(255,255,255,.05);
-  box-shadow: 0 0 25px rgba(255,78,203,.18);
-}
-.faq-search input::placeholder {
-  color: rgba(255,255,255,.35);
+  background:
+      url('/poisk.png') no-repeat 20px center,
+      rgba(255,255,255,.06);
+  background-size: 18px;
+  box-shadow:
+      0 0 22px rgba(255,78,203,.25);
+  transform: translateY(-1px);
 }
 .faq-grid {
   display: flex;
@@ -263,13 +246,14 @@ const toggle = (index) => {
 }
 .faq-card {
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.06);
   border-radius: 28px;
-  background: linear-gradient(
-      180deg,
-      rgba(255,255,255,.05),
-      rgba(255,255,255,.02)
-  );
+  border: 1px solid rgba(255,255,255,.08);
+  background:
+      linear-gradient(
+          180deg,
+          rgba(255,255,255,.05),
+          rgba(255,255,255,.02)
+      );
   backdrop-filter: blur(14px);
   transition:
       border-color .25s ease,
@@ -277,15 +261,16 @@ const toggle = (index) => {
       box-shadow .25s ease;
 }
 .faq-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: rgba(255,78,203,.35);
-  box-shadow: 0 0 25px rgba(255,78,203,.12);
+  box-shadow:
+      0 0 25px rgba(255,78,203,.12);
 }
 .faq-question {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   padding: 28px 30px;
   border: none;
   background: transparent;
@@ -295,14 +280,14 @@ const toggle = (index) => {
   cursor: pointer;
 }
 .faq-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 34px;
   height: 34px;
   min-width: 34px;
-  border: 1px solid rgba(255,78,203,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
+  border: 1px solid rgba(255,78,203,.3);
   color: #ff4ecb;
   transition:
       transform .25s ease,
@@ -336,13 +321,14 @@ const toggle = (index) => {
   justify-content: space-between;
   gap: 20px;
   padding: 36px;
-  border: 1px solid rgba(255,78,203,.18);
   border-radius: 32px;
-  background: linear-gradient(
-      180deg,
-      rgba(255,78,203,.10),
-      rgba(255,255,255,.03)
-  );
+  border: 1px solid rgba(255,78,203,.18);
+  background:
+      linear-gradient(
+          180deg,
+          rgba(255,78,203,.10),
+          rgba(255,255,255,.03)
+      );
 }
 .support-box h2 {
   font-size: 32px;
@@ -354,13 +340,14 @@ const toggle = (index) => {
 .support-box button {
   height: 56px;
   padding: 0 26px;
-  border: 1px solid rgba(255,78,203,.45);
   border-radius: 18px;
-  background: linear-gradient(
-      180deg,
-      rgba(255,78,203,.18),
-      rgba(255,78,203,.08)
-  );
+  border: 1px solid rgba(255,78,203,.45);
+  background:
+      linear-gradient(
+          90deg,
+          #ff4ecb,
+          #7b61ff
+      );
   color: white;
   font-size: 15px;
   font-weight: 600;
@@ -371,7 +358,36 @@ const toggle = (index) => {
 }
 .support-box button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(255,78,203,.22);
+  box-shadow:
+      0 0 25px rgba(255,78,203,.22);
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp .8s ease forwards;
+}
+.delay-1 {
+  animation-delay: .15s;
+}
+.delay-2 {
+  animation-delay: .3s;
+}
+
+.delay-3 {
+  animation-delay: .45s;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.line {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 32px;
 }
 .footer {
   display: flex;
@@ -382,63 +398,61 @@ const toggle = (index) => {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-      circle at top left,
-      rgba(255,78,203,.12),
-      transparent 35%
-  );
+  background:
+      radial-gradient(
+          circle at top left,
+          rgba(255,78,203,.12),
+          transparent 35%
+      );
   pointer-events: none;
 }
 .footer-container {
-  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 70px;
-  width: 100%;
-  max-width: 1920px;
-  padding: 0 40px;
+  position: relative;
 }
 .footer-brand img {
-  display: block;
   width: 140px;
+  display: block;
   object-fit: contain;
 }
-#app > footer > div > div.footer-brand > img {
-  position: relative;
-  bottom: 50px;
-}
 .footer-brand p {
-  position: relative;
-  bottom: 100px;
-  max-width: 170px;
   margin-top: 14px;
   color: rgba(255,255,255,.42);
   font-size: 11px;
   line-height: 1.5;
-}
-.footer-socials {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-}
-.footer-socials a {
   position: relative;
   bottom: 100px;
+  max-width: 170px;
+}
+.footer-socials {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+}
+.footer-socials a {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  bottom: 100px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 12px;
   background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
   transition: .25s ease;
 }
 .footer-socials a:hover {
-  transform: translateY(-2px);
   border-color: #ff4ecb;
-  box-shadow: 0 0 20px rgba(255,78,203,.18);
+  transform: translateY(-2px);
+  box-shadow:
+      0 0 20px rgba(255,78,203,.18);
 }
 .footer-socials img {
   width: 20px;
@@ -450,16 +464,16 @@ const toggle = (index) => {
   gap: 5px;
 }
 .footer-column h4 {
-  margin-bottom: 16px;
   color: #ff4ecb;
   font-size: 15px;
   font-weight: 600;
+  margin-bottom: 16px;
   letter-spacing: .04em;
 }
 .footer-column a {
   color: rgba(255,255,255,.45);
-  font-size: 14px;
   text-decoration: none;
+  font-size: 14px;
   transition:
       color .25s ease,
       transform .25s ease;
@@ -480,37 +494,50 @@ const toggle = (index) => {
   margin-bottom: 24px;
 }
 .footer-select {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   height: 40px;
   padding: 0 16px;
-  border: 1px solid rgba(255,78,203,.45);
   border-radius: 12px;
+  border: 1px solid rgba(255,78,203,.45);
   background: rgba(255,255,255,.02);
   color: white;
   font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
   transition: .25s ease;
 }
 .footer-select:hover {
   border-color: #ff4ecb;
 }
-.footer-right p,
-.footer-right span {
+.footer-right p {
   color: rgba(255,255,255,.45);
+  font-size: 10px;
   line-height: 1.6;
   max-width: 260px;
 }
-.footer-right p {
-  font-size: 10px;
-}
 .footer-right span {
-  width: 260px;
   margin-top: 3px;
+  color: rgba(255,255,255,.45);
   font-size: 11px;
+  line-height: 1.6;
+  width: 260px;
 }
-@media (max-width: 1100px) {
+#app > div > footer > div > div.footer-brand > img {
+  position: relative;
+  bottom: 50px;
+}
+.nav-links a:hover {
+  color: #ff4ecb;
+  transform: translateY(-1px);
+}
+.active-link {
+  color: #ff4ecb !important;
+}
+@media(max-width: 1100px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .footer-right {
     align-items: flex-start;
   }
@@ -519,34 +546,12 @@ const toggle = (index) => {
     text-align: left;
   }
 }
-@media (max-width: 768px) {
-  .faq {
-    padding-top: 120px;
-  }
-  .faq-hero h1 {
-    font-size: 40px;
-  }
-  .faq-question {
-    padding: 22px;
-    font-size: 15px;
-  }
-  .faq-answer {
-    padding: 0 22px 22px;
-  }
-  .support-box {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .support-box h2 {
-    font-size: 26px;
-  }
-  .support-box button {
-    width: 100%;
-  }
+@media(max-width: 768px) {
   .footer {
     padding: 40px 0;
   }
   .footer-container {
+    grid-template-columns: 1fr;
     gap: 35px;
     padding: 0 20px;
   }
@@ -564,6 +569,31 @@ const toggle = (index) => {
   }
   .footer-selects {
     flex-wrap: wrap;
+  }
+}
+@media(max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+  .faq-hero h1 {
+    font-size: 42px;
+  }
+  .faq-question {
+    padding: 22px;
+    font-size: 15px;
+  }
+  .faq-answer {
+    padding: 0 22px 22px;
+  }
+  .support-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .support-box h2 {
+    font-size: 26px;
+  }
+  .support-box button {
+    width: 100%;
   }
 }
 </style>

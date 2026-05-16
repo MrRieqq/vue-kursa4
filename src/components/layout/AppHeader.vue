@@ -2,14 +2,13 @@
   <header class="navbar">
     <div class="navbar-inner container">
       <div class="logo">
-        <a href="http://localhost:5173">
-        <img src="/logo.svg" alt="logo">
-        </a>
+        <router-link to="/">
+          <img src="/logo.svg" alt="logo">
+        </router-link>
       </div>
       <nav class="nav-links">
-        <a href="#">Рынок</a>
         <router-link to="/skins" class="nav-link" active-class="active-link">Скины</router-link>
-        <a href="#">Аналитика</a>
+        <router-link to="/analytics" class="nav-link" active-class="active-link">Аналитика</router-link>
         <a href="#">Графики</a>
         <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
       </nav>
@@ -89,7 +88,7 @@
   padding: 0 15px 0 50px;
   border: 2px solid #3C1B37;
   background:
-      url('../../../public/poisk.png') no-repeat 15px center,
+      url('../../../public/posik.svg') no-repeat 15px center,
       rgba(255,255,255,0.03);
   color: white;
   transition:
@@ -104,6 +103,7 @@
   box-shadow:
       0 0 20px rgba(255,78,203,.25);
 }
+
 .nav-right button {
   height: 44px;
   padding: 0 24px;

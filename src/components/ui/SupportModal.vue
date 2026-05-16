@@ -1,47 +1,28 @@
 <template>
   <transition name="fade">
-    <div
-        v-if="modelValue"
-        class="modal-overlay"
-        @click="close"
-    >
+    <div v-if="modelValue" class="modal-overlay" @click="close">
       <div class="modal" @click.stop>
-        <button class="close-btn" @click="close">
-          ✕
-        </button>
-        <h2>
-          Поддержка SkinTick
-        </h2>
+        <button class="close-btn" @click="close">✕</button>
+        <h2>Поддержка SkinTick</h2>
         <p class="subtitle">
           Свяжитесь с нами любым удобным способом
         </p>
         <div class="contacts">
-          <a
-              href="https://t.me/invo_bankai"
-              target="_blank"
-              class="contact-card"
-          >
+          <a href="https://t.me/invo_bankai" target="_blank" class="contact-card">
             <img src="/tg.svg" alt="">
             <div>
               <h3>Telegram</h3>
               <span>@invo_bankai</span>
             </div>
           </a>
-          <a
-              href="https://vk.com/kripo43k"
-              target="_blank"
-              class="contact-card"
-          >
+          <a href="https://vk.com/kripo43k" target="_blank" class="contact-card">
             <img src="/vk.svg" alt="">
             <div>
               <h3>VK</h3>
               <span>vk.com/kripo43k</span>
             </div>
           </a>
-          <a
-              href="mailto:leo.bankai337@gmail.com"
-              class="contact-card"
-          >
+          <a href="mailto:leo.bankai337@gmail.com" class="contact-card">
             <img src="/mail.svg" alt="">
             <div>
               <h3>Email</h3>

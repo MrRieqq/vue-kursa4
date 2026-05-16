@@ -1,12 +1,25 @@
 import express from 'express'
 import cors from 'cors'
 import axios from 'axios'
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 const app = express()
 app.use(cors())
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const jsonPath = path.join(
+    __dirname,
+    'data',
+    'skins.json'
+)
 app.get('/api/skins', async (req, res) => {
     try {
         const response = await axios.get(
-            'https://market.csgo.com/api/v2/prices/USD.json'
+            'https://market.csgo.com/api/v2/prices/USD.json',
+            {
+                timeout: 3500
+            }
         )
         const items = Object.values(
             response.data.items
@@ -157,12 +170,35 @@ app.get('/api/skins', async (req, res) => {
                         `https://market.csgo.com/en/${encodeURIComponent(fullName)}`
                 }
             })
+        await fs.writeFile(
+            jsonPath,
+            JSON.stringify(skins, null, 2),
+            'utf-8'
+        )
+        console.log(
+            'DATA FROM API'
+        )
         res.json(skins)
     } catch(error) {
-        console.log(error.message)
-        res.status(500).json({
-            error: error.message
-        })
+        console.log(
+            'API FAILED -> USING JSON'
+        )
+        try {
+            const jsonData =
+                await fs.readFile(
+                    jsonPath,
+                    'utf-8'
+                )
+            const skins =
+                JSON.parse(jsonData)
+            res.json(skins)
+        } catch(jsonError) {
+            console.log(jsonError.message)
+            res.status(500).json({
+                error:
+                    'API and JSON unavailable'
+            })
+        }
     }
 })
 function getExterior(name) {
