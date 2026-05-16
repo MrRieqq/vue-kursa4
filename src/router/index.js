@@ -24,6 +24,11 @@ const router = createRouter({
             path: '/skins',
             name: 'skins',
             component: () => import('@/pages/Skins.vue')
+        },
+        {
+            path: '/graph',
+            name: 'graph',
+            component: () => import('@/pages/Graph.vue')
         }
     ],
 })
