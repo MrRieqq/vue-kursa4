@@ -240,18 +240,18 @@
         <div class="footer-column">
           <h4>ПОМОЩЬ</h4>
           <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
-          <a href="#">Как продать все скины CS2 в стиме сразу</a>
-          <a href="#">Как это работает</a>
-          <a href="#">Гарантии</a>
-          <a href="#">Контакты</a>
+          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">Как продать все скины CS2 в стиме сразу</a>
+          <a href="https://lis-skins.com/ru/how-it-works/">Как это работает</a>
+          <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
+          <router-link to="/contacts" class="nav-link" active-class="active-link">Контакты</router-link>
         </div>
         <div class="footer-column">
           <h4>ПОЛЕЗНОЕ</h4>
-          <a href="#">Блог</a>
-          <a href="#">Отзывы о нас</a>
-          <a href="#">Пользовательское соглашение</a>
-          <a href="#">Политика конфиденциальности</a>
-          <a href="#">API</a>
+          <a href="https://lis-skins.com/ru/blog/">Блог</a>
+          <a href="https://lis-skins.com/ru/reviews/">Отзывы о нас</a>
+          <a href="https://lis-skins.com/ru/oferta/">Пользовательское соглашение</a>
+          <a href="https://lis-skins.com/ru/privacy_policy/">Политика конфиденциальности</a>
+          <a href="https://lis-skins.com/ru/profile/api/">API</a>
         </div>
         <div class="footer-right">
           <div class="footer-selects">

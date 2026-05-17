@@ -8,12 +8,12 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView,
+            component: () => import('@/views/HomeView.vue'),
         },
         {
             path: '/faq',
             name: 'faq',
-            component: FAQ,
+            component: () => import('@/pages/FAQ.vue'),
         },
         {
             path: '/analytics',
@@ -26,10 +26,15 @@ const router = createRouter({
             component: () => import('@/pages/Skins.vue')
         },
         {
-            path: '/graph',
-            name: 'graph',
-            component: () => import('@/pages/Graph.vue')
-        }
+            path: '/guarantees',
+            name: 'guarantees',
+            component: () => import('@/pages/Guarantees.vue')
+        },
+        {
+            path: '/contacts',
+            name: 'contacts',
+            component: () => import('@/pages/Contacts.vue')
+        },
     ],
 })
 export default router

@@ -9,7 +9,7 @@
       <nav class="nav-links">
         <router-link to="/skins" class="nav-link" active-class="active-link">Скины</router-link>
         <router-link to="/analytics" class="nav-link" active-class="active-link">Аналитика</router-link>
-        <router-link to="/graph" class="nav-link" active-class="active-link">Графики</router-link>
+        <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
         <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
       </nav>
       <div class="nav-right">
