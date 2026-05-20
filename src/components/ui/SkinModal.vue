@@ -51,7 +51,7 @@
             <div class="bottom-buy">
               <div class="price-wrapper">
                 <div class="price">
-                  ${{ skin.price }}
+                  {{ formatPrice(skin.price) }}
                 </div>
                 <div
                     class="percent"
@@ -76,7 +76,8 @@ import {
   computed,
   watch,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  inject
 } from 'vue'
 const props = defineProps({
   show: Boolean,
@@ -85,6 +86,7 @@ const props = defineProps({
 const emit = defineEmits([
   'close'
 ])
+const formatPrice = inject('formatPrice')
 const close = () => {
   emit('close')
 }

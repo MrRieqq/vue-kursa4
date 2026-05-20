@@ -20,7 +20,7 @@
     <SkinGraph :prices="skin.graph" />
     <div class="bottom">
       <div>
-        <h2>${{ skin.price }}</h2>
+        <h2>{{ formatPrice(skin.price) }}</h2>
         <small>
           {{ skin.updated }}
         </small>
@@ -36,6 +36,8 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { useCurrency } from '@/stores/useCurrency.js'
+const { formatPrice } = useCurrency()
 import SkinGraph from './SkinGraph.vue'
 import SkinModal from '../ui/SkinModal.vue'
 const showModal = ref(false)

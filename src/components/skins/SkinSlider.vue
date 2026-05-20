@@ -21,7 +21,6 @@
 import emblaCarouselVue from 'embla-carousel-vue'
 import WheelGesturesPlugin from 'embla-carousel-wheel-gestures'
 import SkinCard from './SkinCard.vue'
-
 defineProps({
   skins: Array
 })

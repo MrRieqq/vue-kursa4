@@ -4,31 +4,31 @@
     <main class="hero container">
       <section class="hero-content fade-up">
         <h1>
-          Не знаешь реальную цену скина?<br>
+          {{ t('heroTitle1') }}<br>
           <span>SkinTick</span>
-          обновляет рынок каждые 10 минут.
+          {{ t('heroTitle2') }}
         </h1>
         <p>
-          Актуальные цены, графики и аналитика рынка CS2 в реальном времени
+          {{ t('heroDesc') }}
         </p>
       </section>
       <section class="features fade-up delay-1">
         <div class="feature-card">
-          <img src="/hours.svg"> Обновление цен каждые 10 минут
+          <img src="/hours.svg">   {{ t('updatePrices') }}
         </div>
         <div class="feature-card">
-          <img src="/bd.svg"> 100+ площадок и источников
+          <img src="/bd.svg"> {{ t('platforms') }}
         </div>
         <div class="feature-card">
-          <img src="/fire.svg"> Точные данные и аналитика
+          <img src="/fire.svg"> {{ t('analytics') }}
         </div>
         <div class="feature-card">
-          <img src="/graph.svg"> История цен и тренды
+          <img src="/graph.svg"> {{ t('history') }}
         </div>
       </section>
       <section class="skins-section fade-up delay-2">
         <div v-if="loading" class="loading">
-          Загрузка скинов...
+          {{ t('loading') }}
         </div>
         <SkinSlider
             v-else
@@ -40,34 +40,34 @@
           <div class="stat-card fade-up delay-1">
             <div class="stat-top">
               <img src="/graph.svg" alt="">
-              <span>Рыночная сводка</span>
+              <span>{{ t('marketSummary') }}</span>
             </div>
-            <h2>$ 2,847,653</h2>
-            <p>Общий объем рынка</p>
+            <h2>{{ formatPrice(2847653) }}</h2>
+            <p>{{ t('marketVolume') }}</p>
           </div>
           <div class="stat-card fade-up delay-2">
             <div class="stat-top">
               <img src="/box.svg" alt="">
-              <span>Активных скинов на продаже</span>
+              <span>{{ t('activeSkins') }}</span>
             </div>
             <h2>1,245,672</h2>
-            <p>Отслеживается</p>
+            <p>{{ t('tracked') }}</p>
           </div>
           <div class="stat-card fade-up delay-3">
             <div class="stat-top">
               <img src="/update.svg" alt="">
-              <span>Обновлений сегодня</span>
+              <span>{{ t('todayUpdates') }}</span>
             </div>
             <h2>8,642,112</h2>
-            <p>Последнее обновление 2 мин. назад</p>
+            <p>{{ t('lastUpdate') }}</p>
           </div>
           <div class="stat-card fade-up delay-4">
             <div class="stat-top">
               <img src="/server.svg" alt="">
-              <span>Площадки</span>
+              <span>{{ t('platformsTitle') }}</span>
             </div>
             <h2>100+</h2>
-            <p>Источников данных</p>
+            <p>{{ t('dataSources') }}</p>
           </div>
         </div>
         <div class="bottom-features">
@@ -76,11 +76,8 @@
               <img src="/fire.svg" alt="">
             </div>
             <div>
-              <h3>Точные данные</h3>
-              <p>
-                Собираем цены с 100+
-                площадок и источников
-              </p>
+              <h3>{{ t('accurateData') }}</h3>
+              <p>{{ t('accurateDataDesc') }}</p>
             </div>
           </div>
           <div class="divider"></div>
@@ -89,11 +86,8 @@
               <img src="/update.svg">
             </div>
             <div>
-              <h3>Частое обновление</h3>
-              <p>
-                Цена обновляется
-                каждые 10 минут
-              </p>
+              <h3>{{ t('fastUpdates') }}</h3>
+              <p>{{ t('fastUpdatesDesc') }}</p>
             </div>
           </div>
           <div class="divider"></div>
@@ -102,11 +96,8 @@
               <img src="/graph.svg" alt="">
             </div>
             <div>
-              <h3>Графики и аналитика</h3>
-              <p>
-                История цен, тренды
-                и рыночные индикаторы
-              </p>
+              <h3>{{ t('chartsAnalytics') }}</h3>
+              <p>{{ t('chartsAnalyticsDesc') }}</p>
             </div>
           </div>
           <div class="divider"></div>
@@ -115,11 +106,8 @@
               <img src="/kolokol.svg" alt="">
             </div>
             <div>
-              <h3>Уведомления</h3>
-              <p>
-                Настраивайте оповещения
-                о изменении цен
-              </p>
+              <h3>{{ t('notifications') }}</h3>
+              <p>{{ t('notificationsDesc') }}</p>
             </div>
           </div>
         </div>
@@ -130,11 +118,7 @@
       <div class="footer-container">
         <div class="footer-brand">
           <img src="/logo.svg" alt="SkinTick">
-          <p>
-            Актуальные цены, графики
-            и аналитика рынка CS2
-            в реальном времени
-          </p>
+          <p>{{ t('footerDesc') }}</p>
           <div class="footer-socials">
             <a href="https://www.tiktok.com/@lolke17">
               <img src="/tiktok.svg" alt="">
@@ -151,60 +135,121 @@
           </div>
         </div>
         <div class="footer-column">
-          <h4>МАРКЕТ</h4>
-          <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
-          <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
-          <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
+          <h4>{{ t('footerMarket') }}</h4>
+          <a href="https://lis-skins.com/ru/cs2/">{{ t('sellSkins') }}</a>
+          <a href="https://lis-skins.com/ru/market/cs2/">{{ t('buySkins') }}</a>
+          <a href="https://cs.money/ru/csgo/trade/">{{ t('tradeSkins') }}</a>
         </div>
         <div class="footer-column">
-          <h4>ПОМОЩЬ</h4>
-          <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
-          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">Как продать все скины CS2 в стиме сразу</a>
-          <a href="https://lis-skins.com/ru/how-it-works/">Как это работает</a>
-          <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
-          <router-link to="/contacts" class="nav-link" active-class="active-link">Контакты</router-link>
+          <h4>{{ t('footerHelp') }}</h4>
+          <router-link to="/faq" class="nav-link" active-class="active-link">{{ t('faq') }}</router-link>
+          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">{{ t('sellAll') }}</a>
+          <a href="https://lis-skins.com/ru/how-it-works/">{{ t('howItWorks') }}</a>
+          <router-link to="/guarantees" class="nav-link" active-class="active-link">{{ t('guarantees') }}</router-link>
+          <router-link to="/contacts" class="nav-link" active-class="active-link">{{ t('contacts') }}</router-link>
         </div>
         <div class="footer-column">
-          <h4>ПОЛЕЗНОЕ</h4>
-          <a href="https://lis-skins.com/ru/blog/">Блог</a>
-          <a href="https://lis-skins.com/ru/reviews/">Отзывы о нас</a>
-          <a href="https://lis-skins.com/ru/oferta/">Пользовательское соглашение</a>
-          <a href="https://lis-skins.com/ru/privacy_policy/">Политика конфиденциальности</a>
-          <a href="https://lis-skins.com/ru/profile/api/">API</a>
+          <h4>{{ t('footerUseful') }}</h4>
+          <a href="https://lis-skins.com/ru/blog/">{{ t('blog') }}</a>
+          <a href="https://lis-skins.com/ru/reviews/">{{ t('reviews') }}</a>
+          <a href="https://lis-skins.com/ru/oferta/">{{ t('agreement') }}</a>
+          <a href="https://lis-skins.com/ru/privacy_policy/">{{ t('privacy') }}</a>
+          <a href="https://lis-skins.com/ru/profile/api/">{{ t('api') }}</a>
         </div>
         <div class="footer-right">
           <div class="footer-selects">
-            <button class="footer-select"><img src="/public/usd.svg" alt="usd"> USD</button>
-            <button class="footer-select"><img src="/public/ru.svg" alt="ru"> RU</button>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showCurrency = !showCurrency">
+                <img :src="currency === 'USD' ? '/usd.svg' : '/rub.svg'" alt="">{{ currency }}
+              </button>
+              <div v-if="showCurrency" class="currency-menu">
+                <button class="currency-item" @click="changeCurrency('USD')"><img src="/usd.svg">USD</button>
+                <button class="currency-item" @click="changeCurrency('RUB')"><img src="/rub.svg">RUB</button>
+              </div>
+            </div>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showLanguage = !showLanguage">
+                <img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">
+                {{ language }}
+              </button>
+
+              <div v-if="showLanguage" class="currency-menu">
+                <button class="currency-item" @click="changeLanguage('RU')">
+                  <img src="/ru.svg">
+                  RU
+                </button>
+
+                <button class="currency-item" @click="changeLanguage('EN')">
+                  <img src="/en.svg">
+                  EN
+                </button>
+              </div>
+            </div>
           </div>
-          <p>
-            Веб-сайт SkinTick управляется компанией Ин-Гейм
-            Солюшн ЛТД.
-          </p>
-          <span>
-        © 2017-2026 SkinTick, все права защищены<br>
-        Powered by Steam. Not affiliated with Valve Corp.
-      </span>
+          <p>{{ t('footerCompany') }}</p>
+          <span>{{ t('footerRights') }}<br>{{ t('footerRights2') }}</span>
         </div>
       </div>
     </footer>
   </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import {
+  onMounted,
+  ref,
+} from 'vue'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 import { useSkinStore }
   from '@/stores/skinStore'
+
 import AppHeader
   from '@/components/layout/AppHeader.vue'
+
 import SkinSlider
   from '@/components/skins/SkinSlider.vue'
+
 const skinStore = useSkinStore()
+const { t, locale } = useI18n()
 const { skins, loading } =
     storeToRefs(skinStore)
-onMounted(() => {
+
+import { useCurrency }
+  from '@/stores/useCurrency.js'
+
+const {
+  currency,
+  changeCurrency: setCurrency,
+  formatPrice
+} = useCurrency()
+
+const showCurrency = ref(false)
+function changeCurrency(val) {
+
+  setCurrency(val)
+
+  showCurrency.value = false
+}
+onMounted(async () => {
   skinStore.startAutoUpdate()
 })
+const language = ref(locale.value.toUpperCase())
+
+const showLanguage = ref(false)
+
+function changeLanguage(val) {
+
+  language.value = val
+
+  locale.value = val.toLowerCase()
+
+  localStorage.setItem(
+      'lang',
+      val.toLowerCase()
+  )
+
+  showLanguage.value = false
+}
 </script>
 <style scoped>
 .line {
@@ -640,5 +685,57 @@ onMounted(() => {
   .stat-card h2 {
     font-size: 34px;
   }
+}
+.currency-dropdown {
+  position: relative;
+}
+
+.currency-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+
+  width: 100%;
+
+  background: #1b0b17;
+
+  border: 1px solid rgba(255,78,203,.3);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  z-index: 999;
+}
+
+.currency-item {
+  width: 100%;
+
+  height: 42px;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 14px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.currency-item img {
+  width: 18px;
+  height: 18px;
+}
+
+.currency-item:hover {
+  background: rgba(255,78,203,.15);
 }
 </style>

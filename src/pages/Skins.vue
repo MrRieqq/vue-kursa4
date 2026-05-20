@@ -69,7 +69,7 @@
           </div>
           <div class="skin-bottom">
             <div class="price-block">
-              <strong>$ {{ skin.price }}</strong>
+              <strong>{{ formatPrice(skin.price) }}</strong>
               <div class="price-change" :class="skin.trend">
                 {{ skin.change > 0 ? '+' : '' }}{{ skin.change }}%
               </div>
@@ -121,8 +121,33 @@
         </div>
         <div class="footer-right">
           <div class="footer-selects">
-            <button class="footer-select"><img src="/usd.svg" alt="usd">USD</button>
-            <button class="footer-select"><img src="/ru.svg" alt="ru">RU</button>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showCurrency = !showCurrency">
+                <img :src="currency === 'USD' ? '/usd.svg' : '/rub.svg'" alt="">{{ currency }}
+              </button>
+              <div v-if="showCurrency" class="currency-menu">
+                <button class="currency-item" @click="changeCurrency('USD')"><img src="/usd.svg">USD</button>
+                <button class="currency-item" @click="changeCurrency('RUB')"><img src="/rub.svg">RUB</button>
+              </div>
+            </div>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showLanguage = !showLanguage">
+                <img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">
+                {{ language }}
+              </button>
+
+              <div v-if="showLanguage" class="currency-menu">
+                <button class="currency-item" @click="changeLanguage('RU')">
+                  <img src="/ru.svg">
+                  RU
+                </button>
+
+                <button class="currency-item" @click="changeLanguage('EN')">
+                  <img src="/en.svg">
+                  EN
+                </button>
+              </div>
+            </div>
           </div>
           <p>
             Веб-сайт SkinTick управляется компанией Ин-Гейм
@@ -143,14 +168,35 @@ import {
   ref,
   onMounted
 } from 'vue'
-
 import axios from 'axios'
-
 import AppHeader from '@/components/layout/AppHeader.vue'
+import { useCurrency } from '@/stores/useCurrency.js'
+const {
+  currency,
+  changeCurrency: setCurrency,
+  formatPrice
+} = useCurrency()
 const search = ref('')
 const selectedCategory = ref('Все')
 const selectedSort = ref('popular')
 const skins = ref([])
+const showCurrency = ref(false)
+const language = ref('RU')
+
+const showLanguage = ref(false)
+
+function changeLanguage(val) {
+
+  language.value = val
+
+  showLanguage.value = false
+}
+function changeCurrency(val) {
+
+  setCurrency(val)
+
+  showCurrency.value = false
+}
 const categories = [
   'Все',
   'Винтовки',
@@ -800,5 +846,57 @@ function getCategory(name) {
   .footer-container {
     flex-direction: column;
   }
+}
+.currency-dropdown {
+  position: relative;
+}
+
+.currency-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+
+  width: 100%;
+
+  background: #1b0b17;
+
+  border: 1px solid rgba(255,78,203,.3);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  z-index: 999;
+}
+
+.currency-item {
+  width: 100%;
+
+  height: 42px;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 14px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.currency-item img {
+  width: 18px;
+  height: 18px;
+}
+
+.currency-item:hover {
+  background: rgba(255,78,203,.15);
 }
 </style>
