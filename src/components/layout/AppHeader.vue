@@ -7,15 +7,15 @@
         </router-link>
       </div>
       <nav class="nav-links">
-        <router-link to="/skins" class="nav-link" active-class="active-link">Скины</router-link>
-        <router-link to="/analytics" class="nav-link" active-class="active-link">Аналитика</router-link>
-        <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
-        <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
+        <router-link to="/skins" class="nav-link" active-class="active-link">{{ t('headerSkins') }}</router-link>
+        <router-link to="/analytics" class="nav-link" active-class="active-link">{{ t('headerAnalytics') }}</router-link>
+        <router-link to="/guarantees" class="nav-link" active-class="active-link">{{ t('headerGuarantees') }}</router-link>
+        <router-link to="/faq" class="nav-link" active-class="active-link">{{ t('headerFaq') }}</router-link>
       </nav>
       <div class="nav-right">
-        <input type="text" placeholder="Поиск скина..." class="input-with-icon">
-        <button class="login-btn" @click="openLogin">Войти</button>
-        <button class="register-btn" @click="openRegister">Регистрация</button>
+        <input type="text" :placeholder="t('searchPlaceholder')" class="input-with-icon">
+        <button class="login-btn" @click="openLogin">{{ t('login') }}</button>
+        <button class="register-btn" @click="openRegister">{{ t('register') }}</button>
       </div>
     </div>
   </header>
@@ -161,16 +161,15 @@
 </style>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AuthModal from '@/components/ui/AuthModal.vue'
-
+const { t } = useI18n()
 const showModal = ref(false)
 const modalMode = ref('login')
-
 const openLogin = () => {
   modalMode.value = 'login'
   showModal.value = true
 }
-
 const openRegister = () => {
   modalMode.value = 'register'
   showModal.value = true

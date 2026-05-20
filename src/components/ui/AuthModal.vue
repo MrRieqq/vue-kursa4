@@ -6,31 +6,27 @@
           ✕
         </button>
         <h2>
-          {{ isLogin ? 'Вход' : 'Регистрация' }}
+          {{ isLogin ? t('authLogin') : t('authRegister') }}
         </h2>
         <p class="subtitle">
-          {{
-            isLogin
-                ? 'Войдите в аккаунт SkinTick'
-                : 'Создайте аккаунт SkinTick'
-          }}
+          {{ isLogin ? t('authLoginSubtitle') : t('authRegisterSubtitle') }}
         </p>
         <form class="auth-form">
-          <input v-if="!isLogin" type="text" placeholder="Ваш ник">
+          <input v-if="!isLogin" type="text" :placeholder="t('authNickname')">
           <input type="email" placeholder="Email">
-          <input type="password" placeholder="Пароль">
+          <input type="password" :placeholder="t('authPassword')">
           <button type="submit" class="submit-btn">
-            {{ isLogin ? 'Войти' : 'Создать аккаунт' }}
+            {{ isLogin ? t('authLogin') : t('authCreateAccount') }}
           </button>
         </form>
         <div class="divider">
-          <span>или войти через</span>
+          <span>{{ t('authOr') }}</span>
         </div>
         <a href="https://steamcommunity.com/openid/login/" target="_blank" class="steam-btn"><img src="/steam.svg" alt="Steam">Steam</a>
         <div class="switch-text">
-          <span>{{ isLogin ? 'Нет аккаунта?' : 'Уже есть аккаунт?' }}</span>
+          <span>{{ isLogin ? t('authNoAccount') : t('authHaveAccount') }}</span>
           <button class="switch-btn" @click="isLogin = !isLogin">
-            {{ isLogin ? 'Зарегистрироваться' : 'Войти' }}
+            {{ isLogin ? t('authRegisterBtn') : t('authLoginBtn') }}
           </button>
         </div>
       </div>
@@ -44,6 +40,8 @@ import {
   onMounted,
   onBeforeUnmount
 } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({
   modelValue: Boolean,
   mode: {
@@ -51,27 +49,41 @@ const props = defineProps({
     default: 'login'
   }
 })
-const emit = defineEmits(['update:modelValue'])
-const isLogin = ref(props.mode === 'login')
+const emit = defineEmits([
+  'update:modelValue'
+])
+const isLogin = ref(
+    props.mode === 'login'
+)
 watch(
     () => props.mode,
     (newMode) => {
-      isLogin.value = newMode === 'login'
+      isLogin.value =
+          newMode === 'login'
     }
 )
 const close = () => {
   emit('update:modelValue', false)
 }
 const handleKeydown = (e) => {
-  if (e.key === 'Escape' && props.modelValue) {
+  if (
+      e.key === 'Escape' &&
+      props.modelValue
+  ) {
     close()
   }
 }
 onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
+  window.addEventListener(
+      'keydown',
+      handleKeydown
+  )
 })
 onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeydown)
+  window.removeEventListener(
+      'keydown',
+      handleKeydown
+  )
 })
 </script>
 <style scoped>

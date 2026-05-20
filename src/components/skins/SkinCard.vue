@@ -21,13 +21,9 @@
     <div class="bottom">
       <div>
         <h2>{{ formatPrice(skin.price) }}</h2>
-        <small>
-          {{ skin.updated }}
-        </small>
+        <small>{{ t('updatedSkin') }}</small>
       </div>
-      <span :class="skin.percent.includes('-')? 'red': 'green'">
-        {{ skin.percent }}
-      </span>
+      <span :class="skin.percent.includes('-')? 'red': 'green'">{{ skin.percent }}</span>
     </div>
   </div>
   <Teleport to="body">
@@ -38,6 +34,8 @@
 import { ref } from 'vue'
 import { useCurrency } from '@/stores/useCurrency.js'
 const { formatPrice } = useCurrency()
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 import SkinGraph from './SkinGraph.vue'
 import SkinModal from '../ui/SkinModal.vue'
 const showModal = ref(false)

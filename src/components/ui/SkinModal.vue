@@ -6,7 +6,7 @@
         <div class="top-section">
           <div class="left">
             <div class="summary-card">
-              <h3>Сводка</h3>
+              <h3>{{t('summaryBuy')}}</h3>
               <div class="float-box">
                 <div class="float-top">
                   <span>Float</span>
@@ -46,7 +46,8 @@
               <img :src="skin.image" :alt="skin.market_hash_name">
             </div>
             <div class="actions">
-              <a :href="skin.inspect" target="_blank" class="action-btn">Осмотреть в игре</a>
+              <button
+                  class="action-btn" @click="openInspect">{{ t('gameCheck') }}</button>
             </div>
             <div class="bottom-buy">
               <div class="price-wrapper">
@@ -63,7 +64,7 @@
                   {{ skin.percent }}
                 </div>
               </div>
-              <router-link to="/skins" class="buy-btn" >Перейти к выбору</router-link>
+              <router-link to="/skins" class="buy-btn" >{{ t('gotoBuy') }}</router-link>
             </div>
           </div>
         </div>
@@ -76,30 +77,55 @@ import {
   computed,
   watch,
   onMounted,
-  onBeforeUnmount,
-  inject
+  onBeforeUnmount
 } from 'vue'
+
+import { useI18n } from 'vue-i18n'
+import { useCurrency } from '@/stores/useCurrency.js'
+
+const { t } = useI18n()
+
 const props = defineProps({
   show: Boolean,
-  skin: Object
+  skin: {
+    type: Object,
+    default: () => ({})
+  }
 })
+
 const emit = defineEmits([
   'close'
 ])
-const formatPrice = inject('formatPrice')
+const openInspect = () => {
+  const confirmed = window.confirm(
+      t('inspectConfirm')
+  )
+
+  if (confirmed) {
+    window.open(
+        props.skin.inspect,
+        '_blank'
+    )
+  }
+}
+const { formatPrice } = useCurrency()
+
 const close = () => {
   emit('close')
 }
+
 const randomFloat = computed(() =>
     Math.floor(
         Math.random() * 999999999
     )
 )
+
 const pattern = computed(() =>
     Math.floor(
         Math.random() * 999
     )
 )
+
 const handleKeydown = (e) => {
   if (
       e.key === 'Escape' &&
@@ -108,32 +134,32 @@ const handleKeydown = (e) => {
     close()
   }
 }
+
 watch(
     () => props.show,
     (opened) => {
       if (opened) {
-        document.body.style.overflow =
-            'hidden'
-
+        document.body.style.overflow = 'hidden'
       } else {
-        document.body.style.overflow =
-            'auto'
+        document.body.style.overflow = 'auto'
       }
     }
 )
+
 onMounted(() => {
   window.addEventListener(
       'keydown',
       handleKeydown
   )
 })
+
 onBeforeUnmount(() => {
   window.removeEventListener(
       'keydown',
       handleKeydown
   )
-  document.body.style.overflow =
-      'auto'
+
+  document.body.style.overflow = 'auto'
 })
 </script>
 <style scoped>

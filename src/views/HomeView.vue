@@ -3,14 +3,8 @@
     <AppHeader />
     <main class="hero container">
       <section class="hero-content fade-up">
-        <h1>
-          {{ t('heroTitle1') }}<br>
-          <span>SkinTick</span>
-          {{ t('heroTitle2') }}
-        </h1>
-        <p>
-          {{ t('heroDesc') }}
-        </p>
+        <h1>{{ t('heroTitle1') }}<br><span>SkinTick</span> {{ t('heroTitle2') }}</h1>
+        <p>{{ t('heroDesc') }}</p>
       </section>
       <section class="features fade-up delay-1">
         <div class="feature-card">
@@ -30,10 +24,7 @@
         <div v-if="loading" class="loading">
           {{ t('loading') }}
         </div>
-        <SkinSlider
-            v-else
-            :skins="skins"
-        />
+        <SkinSlider v-else :skins="skins"/>
       </section>
       <section class="stats-section fade-up delay-3">
         <div class="stats-grid">
@@ -168,21 +159,10 @@
               </div>
             </div>
             <div class="currency-dropdown">
-              <button class="footer-select" @click="showLanguage = !showLanguage">
-                <img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">
-                {{ language }}
-              </button>
-
+              <button class="footer-select" @click="showLanguage = !showLanguage"><img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">{{ language }}</button>
               <div v-if="showLanguage" class="currency-menu">
-                <button class="currency-item" @click="changeLanguage('RU')">
-                  <img src="/ru.svg">
-                  RU
-                </button>
-
-                <button class="currency-item" @click="changeLanguage('EN')">
-                  <img src="/en.svg">
-                  EN
-                </button>
+                <button class="currency-item" @click="changeLanguage('RU')"><img src="/ru.svg">RU</button>
+                <button class="currency-item" @click="changeLanguage('EN')"><img src="/en.svg">EN</button>
               </div>
             </div>
           </div>
@@ -202,52 +182,38 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useSkinStore }
   from '@/stores/skinStore'
-
 import AppHeader
   from '@/components/layout/AppHeader.vue'
-
 import SkinSlider
   from '@/components/skins/SkinSlider.vue'
-
 const skinStore = useSkinStore()
 const { t, locale } = useI18n()
 const { skins, loading } =
     storeToRefs(skinStore)
-
 import { useCurrency }
   from '@/stores/useCurrency.js'
-
 const {
   currency,
   changeCurrency: setCurrency,
   formatPrice
 } = useCurrency()
-
 const showCurrency = ref(false)
 function changeCurrency(val) {
-
   setCurrency(val)
-
   showCurrency.value = false
 }
 onMounted(async () => {
   skinStore.startAutoUpdate()
 })
 const language = ref(locale.value.toUpperCase())
-
 const showLanguage = ref(false)
-
 function changeLanguage(val) {
-
   language.value = val
-
   locale.value = val.toLowerCase()
-
   localStorage.setItem(
       'lang',
       val.toLowerCase()
   )
-
   showLanguage.value = false
 }
 </script>
@@ -689,52 +655,34 @@ function changeLanguage(val) {
 .currency-dropdown {
   position: relative;
 }
-
 .currency-menu {
   position: absolute;
   top: 50px;
   left: 0;
-
   width: 100%;
-
   background: #1b0b17;
-
   border: 1px solid rgba(255,78,203,.3);
-
   border-radius: 14px;
-
   overflow: hidden;
-
   z-index: 999;
 }
-
 .currency-item {
   width: 100%;
-
   height: 42px;
-
   border: none;
-
   background: transparent;
-
   color: white;
-
   display: flex;
   align-items: center;
   gap: 10px;
-
   padding: 0 14px;
-
   cursor: pointer;
-
   transition: .2s;
 }
-
 .currency-item img {
   width: 18px;
   height: 18px;
 }
-
 .currency-item:hover {
   background: rgba(255,78,203,.15);
 }

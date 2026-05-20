@@ -3,10 +3,8 @@
     <div v-if="modelValue" class="modal-overlay" @click="close">
       <div class="modal" @click.stop>
         <button class="close-btn" @click="close">✕</button>
-        <h2>Поддержка SkinTick</h2>
-        <p class="subtitle">
-          Свяжитесь с нами любым удобным способом
-        </p>
+        <h2>{{ t('supportModalTitle') }}</h2>
+        <p class="subtitle">{{ t('supportModalSubtitle') }}</p>
         <div class="contacts">
           <a href="https://t.me/invo_bankai" target="_blank" class="contact-card">
             <img src="/tg.svg" alt="">
@@ -35,13 +33,53 @@
   </transition>
 </template>
 <script setup>
+import {
+  onMounted,
+  onBeforeUnmount,
+  watch
+} from 'vue'
+import { useI18n } from 'vue-i18n'
 const props = defineProps({
   modelValue: Boolean
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits([
+  'update:modelValue'
+])
+const { t } = useI18n()
 const close = () => {
   emit('update:modelValue', false)
 }
+const handleKeydown = (e) => {
+  if (
+      e.key === 'Escape' &&
+      props.modelValue
+  ) {
+    close()
+  }
+}
+watch(
+    () => props.modelValue,
+    (opened) => {
+      if (opened) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
+      }
+    }
+)
+onMounted(() => {
+  window.addEventListener(
+      'keydown',
+      handleKeydown
+  )
+})
+onBeforeUnmount(() => {
+  window.removeEventListener(
+      'keydown',
+      handleKeydown
+  )
+  document.body.style.overflow = 'auto'
+})
 </script>
 <style scoped>
 .fade-enter-active,

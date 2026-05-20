@@ -3,23 +3,15 @@
     <AppHeader />
     <main class="skins container">
       <section class="skins-hero fade-up">
-        <div class="hero-badge">
-          SKINTICK / СКИНЫ
-        </div>
-        <h1>
-          Каталог скинов CS2
-        </h1>
-        <p>
-          Отслеживайте актуальные цены,
-          тренды и динамику рынка
-          в реальном времени.
-        </p>
+        <div class="hero-badge">{{t('skinsBadge')}}</div>
+        <h1>{{t('skinsTitle')}}</h1>
+        <p>{{t('skinsDesc')}}</p>
       </section>
       <section class="skins-toolbar fade-up delay-1">
         <div class="toolbar-search">
           <div class="search-box">
             <img src="/posik.svg" alt="search">
-            <input v-model="search" type="text" placeholder="Поиск скина...">
+            <input v-model="search" type="text" :placeholder="t('searchSkin')">
           </div>
         </div>
         <div class="toolbar-filters">
@@ -29,18 +21,16 @@
               class="category-btn"
               :class="{
               active: selectedCategory === category
-            }"
-              @click="selectedCategory = category"
-          >
-            {{ category }}
+            }" @click="selectedCategory = category">
+            {{ t(category) }}
           </button>
         </div>
         <div class="toolbar-sort">
           <select v-model="selectedSort">
-            <option value="popular">По популярности</option>
-            <option value="price-high">Цена: дорогие</option>
-            <option value="price-low">Цена: дешёвые</option>
-            <option value="change">По росту цены</option>
+            <option value="popular">{{t('sortPopular')}}</option>
+            <option value="price-high">{{t('sortExpensive')}}</option>
+            <option value="price-low">{{t('sortCheap')}}</option>
+            <option value="change">{{t('sortGrowth')}}</option>
           </select>
         </div>
       </section>
@@ -74,7 +64,7 @@
                 {{ skin.change > 0 ? '+' : '' }}{{ skin.change }}%
               </div>
             </div>
-            <a :href="skin.inspect" target="_blank" class="buy-btn">Перейти к покупке</a>
+            <a :href="skin.inspect" target="_blank" class="buy-btn">{{t('buyLink')}}</a>
           </div>
         </article>
       </section>
@@ -85,39 +75,43 @@
       <div class="footer-container">
         <div class="footer-brand">
           <img src="/logo.svg" alt="SkinTick">
-          <p>
-            Актуальные цены, графики
-            и аналитика рынка CS2
-            в реальном времени
-          </p>
+          <p>{{ t('footerDesc') }}</p>
           <div class="footer-socials">
-            <a href="https://www.tiktok.com/@lolke17"><img src="/tiktok.svg" alt=""></a>
-            <a href="https://www.youtube.com/@lol-iz1rs"><img src="/youtube.svg" alt=""></a>
-            <a href="https://vk.com/kripo43k"><img src="/vk.svg" alt=""></a>
-            <a href="https://t.me/invo_bankai"><img src="/tg.svg" alt=""></a>
+            <a href="https://www.tiktok.com/@lolke17">
+              <img src="/tiktok.svg" alt="">
+            </a>
+            <a href="https://www.youtube.com/@lol-iz1rs">
+              <img src="/youtube.svg" alt="">
+            </a>
+            <a href="https://vk.com/kripo43k">
+              <img src="/vk.svg" alt="">
+            </a>
+            <a href="https://t.me/invo_bankai">
+              <img src="/tg.svg" alt="">
+            </a>
           </div>
         </div>
         <div class="footer-column">
-          <h4>МАРКЕТ</h4>
-          <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
-          <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
-          <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
+          <h4>{{ t('footerMarket') }}</h4>
+          <a href="https://lis-skins.com/ru/cs2/">{{ t('sellSkins') }}</a>
+          <a href="https://lis-skins.com/ru/market/cs2/">{{ t('buySkins') }}</a>
+          <a href="https://cs.money/ru/csgo/trade/">{{ t('tradeSkins') }}</a>
         </div>
         <div class="footer-column">
-          <h4>ПОМОЩЬ</h4>
-          <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
-          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">Как продать все скины CS2 в стиме сразу</a>
-          <a href="https://lis-skins.com/ru/how-it-works/">Как это работает</a>
-          <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
-          <router-link to="/contacts" class="nav-link" active-class="active-link">Контакты</router-link>
+          <h4>{{ t('footerHelp') }}</h4>
+          <router-link to="/faq" class="nav-link" active-class="active-link">{{ t('faq') }}</router-link>
+          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">{{ t('sellAll') }}</a>
+          <a href="https://lis-skins.com/ru/how-it-works/">{{ t('howItWorks') }}</a>
+          <router-link to="/guarantees" class="nav-link" active-class="active-link">{{ t('guarantees') }}</router-link>
+          <router-link to="/contacts" class="nav-link" active-class="active-link">{{ t('contacts') }}</router-link>
         </div>
         <div class="footer-column">
-          <h4>ПОЛЕЗНОЕ</h4>
-          <a href="https://lis-skins.com/ru/blog/">Блог</a>
-          <a href="https://lis-skins.com/ru/reviews/">Отзывы о нас</a>
-          <a href="https://lis-skins.com/ru/oferta/">Пользовательское соглашение</a>
-          <a href="https://lis-skins.com/ru/privacy_policy/">Политика конфиденциальности</a>
-          <a href="https://lis-skins.com/ru/profile/api/">API</a>
+          <h4>{{ t('footerUseful') }}</h4>
+          <a href="https://lis-skins.com/ru/blog/">{{ t('blog') }}</a>
+          <a href="https://lis-skins.com/ru/reviews/">{{ t('reviews') }}</a>
+          <a href="https://lis-skins.com/ru/oferta/">{{ t('agreement') }}</a>
+          <a href="https://lis-skins.com/ru/privacy_policy/">{{ t('privacy') }}</a>
+          <a href="https://lis-skins.com/ru/profile/api/">{{ t('api') }}</a>
         </div>
         <div class="footer-right">
           <div class="footer-selects">
@@ -132,31 +126,16 @@
             </div>
             <div class="currency-dropdown">
               <button class="footer-select" @click="showLanguage = !showLanguage">
-                <img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">
-                {{ language }}
+                <img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">{{ language }}
               </button>
-
               <div v-if="showLanguage" class="currency-menu">
-                <button class="currency-item" @click="changeLanguage('RU')">
-                  <img src="/ru.svg">
-                  RU
-                </button>
-
-                <button class="currency-item" @click="changeLanguage('EN')">
-                  <img src="/en.svg">
-                  EN
-                </button>
+                <button class="currency-item" @click="changeLanguage('RU')"><img src="/ru.svg">RU</button>
+                <button class="currency-item" @click="changeLanguage('EN')"><img src="/en.svg">EN</button>
               </div>
             </div>
           </div>
-          <p>
-            Веб-сайт SkinTick управляется компанией Ин-Гейм
-            Солюшн ЛТД.
-          </p>
-          <span>
-            © 2017-2026 SkinTick, все права защищены<br>
-            Powered by Steam. Not affiliated with Valve Corp.
-          </span>
+          <p>{{ t('footerCompany') }}</p>
+          <span>{{ t('footerRights') }}<br>{{ t('footerRights2') }}</span>
         </div>
       </div>
     </footer>
@@ -171,38 +150,39 @@ import {
 import axios from 'axios'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import { useCurrency } from '@/stores/useCurrency.js'
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n()
 const {
   currency,
   changeCurrency: setCurrency,
   formatPrice
 } = useCurrency()
 const search = ref('')
-const selectedCategory = ref('Все')
+const selectedCategory = ref('all')
 const selectedSort = ref('popular')
 const skins = ref([])
 const showCurrency = ref(false)
-const language = ref('RU')
-
+const language = ref(locale.value.toUpperCase())
 const showLanguage = ref(false)
-
 function changeLanguage(val) {
-
   language.value = val
-
+  locale.value = val.toLowerCase()
+  localStorage.setItem(
+      'lang',
+      val.toLowerCase()
+  )
   showLanguage.value = false
 }
 function changeCurrency(val) {
-
   setCurrency(val)
-
   showCurrency.value = false
 }
 const categories = [
-  'Все',
-  'Винтовки',
-  'Пистолеты',
-  'Снайперские',
-  'Дробовики и ПП'
+  'all',
+  'rifles',
+  'pistols',
+  'snipers',
+  'shotguns'
 ]
 onMounted(async () => {
   try {
@@ -228,11 +208,10 @@ onMounted(async () => {
 })
 const filteredSkins = computed(() => {
   let result = [...skins.value]
-  if (selectedCategory.value !== 'Все') {
+  if (selectedCategory.value !== 'all') {
     result = result.filter(
         skin =>
-            skin.category ===
-            selectedCategory.value
+            skin.category === selectedCategory.value
     )
   }
   if (search.value) {
@@ -241,24 +220,20 @@ const filteredSkins = computed(() => {
           `${skin.name} ${skin.skin}`
       return fullName
           .toLowerCase()
-          .includes(
-              search.value.toLowerCase()
-          )
+          .includes(search.value.toLowerCase())
     })
   }
   switch(selectedSort.value) {
     case 'price-high':
       result.sort(
           (a, b) =>
-              Number(b.price) -
-              Number(a.price)
+              Number(b.price) - Number(a.price)
       )
       break
     case 'price-low':
       result.sort(
           (a, b) =>
-              Number(a.price) -
-              Number(b.price)
+              Number(a.price) - Number(b.price)
       )
       break
     case 'change':
@@ -270,9 +245,9 @@ const filteredSkins = computed(() => {
     default:
       result.sort(
           (a, b) =>
-              (b.volume || 0) -
-              (a.volume || 0)
+              (b.volume || 0) - (a.volume || 0)
       )
+
   }
   return result
 })
@@ -322,30 +297,30 @@ function getCategory(name) {
           name.includes(weapon)
       )
   ) {
-    return 'Винтовки'
+    return 'rifles'
   }
   if (
       pistols.some(weapon =>
           name.includes(weapon)
       )
   ) {
-    return 'Пистолеты'
+    return 'pistols'
   }
   if (
       snipers.some(weapon =>
           name.includes(weapon)
       )
   ) {
-    return 'Снайперские'
+    return 'snipers'
   }
   if (
       smgAndShotguns.some(weapon =>
           name.includes(weapon)
       )
   ) {
-    return 'Дробовики и ПП'
+    return 'shotguns'
   }
-  return 'Винтовки'
+  return 'rifles'
 }
 </script>
 <style scoped>
@@ -850,52 +825,34 @@ function getCategory(name) {
 .currency-dropdown {
   position: relative;
 }
-
 .currency-menu {
   position: absolute;
   top: 50px;
   left: 0;
-
   width: 100%;
-
   background: #1b0b17;
-
   border: 1px solid rgba(255,78,203,.3);
-
   border-radius: 14px;
-
   overflow: hidden;
-
   z-index: 999;
 }
-
 .currency-item {
   width: 100%;
-
   height: 42px;
-
   border: none;
-
   background: transparent;
-
   color: white;
-
   display: flex;
   align-items: center;
   gap: 10px;
-
   padding: 0 14px;
-
   cursor: pointer;
-
   transition: .2s;
 }
-
 .currency-item img {
   width: 18px;
   height: 18px;
 }
-
 .currency-item:hover {
   background: rgba(255,78,203,.15);
 }

@@ -3,23 +3,17 @@
     <AppHeader />
     <main class="contacts container">
       <section class="contacts-hero fade-up">
-        <span class="contacts-badge">КОНТАКТЫ / ПОДДЕРЖКА</span>
-        <h1>Контакты SkinTick</h1>
-        <p>
-          Свяжитесь с нами по любым вопросам:
-          поддержка, сотрудничество, интеграции и безопасность.
-        </p>
+        <span class="contacts-badge">{{ t('contactsBadge') }}</span>
+        <h1>{{ t('contactsTitle') }}</h1>
+        <p>{{ t('contactsDesc') }}</p>
       </section>
       <section class="contacts-grid">
         <div class="contact-card fade-up delay-1">
           <div class="contact-icon">
             <img src="/support.svg" alt="">
           </div>
-          <h2>Поддержка</h2>
-          <p>
-            Если у вас возникли вопросы,
-            наша поддержка работает 24/7.
-          </p>
+          <h2>{{ t('contactsSupportTitle') }}</h2>
+          <p>{{ t('contactsSupportDesc') }}</p>
           <div class="contact-list">
             <a href="https://t.me/invo_bankai"><img src="/tg.svg" alt="tg"> Telegram</a>
             <a href="mailto:leo.bankai337@gmail.com"><img src="/mail.svg" alt="email"> leo.bankai337@gmail.com</a>
@@ -29,11 +23,8 @@
           <div class="contact-icon">
             <img src="/party.svg" alt="party">
           </div>
-          <h2>Сотрудничество</h2>
-          <p>
-            Для блогеров, стримеров,
-            рекламы и партнерских предложений.
-          </p>
+          <h2>{{ t('contactsPartnershipTitle') }}</h2>
+          <p>{{ t('contactsPartnershipDesc') }}</p>
           <div class="contact-list">
             <a href="mailto:eftdrops337@gmail.com"><img src="/mail.svg" alt="email"> eftdrops337@gmail.com</a>
             <a href="https://www.youtube.com/@lol-iz1rs"><img src="/youtube.svg" alt="youtube"> Youtube</a>
@@ -43,20 +34,17 @@
       <section class="security-section fade-up delay-3">
         <div class="security-box">
           <div class="security-left">
-            <span class="security-mini">ПРОВЕРКА СОТРУДНИКА</span>
-            <h2>Безопасность</h2>
-            <p>
-              Если кто-то написал вам от имени SkinTick,
-              вы можете проверить сотрудника через поддержку.
-            </p>
+            <span class="security-mini">{{ t('contactsSecurityBadge') }}</span>
+            <h2>{{ t('contactsSecurityTitle') }}</h2>
+            <p>{{ t('contactsSecurityDesc') }}</p>
           </div>
           <div class="security-form">
             <input
                 v-model="employeeInput"
                 type="text"
-                placeholder="Telegram, Youtube или E-mail"
+                :placeholder="t('contactsSecurityPlaceholder')"
                 @keyup.enter="verifyEmployee">
-            <button @click="verifyEmployee">Проверить</button>
+            <button @click="verifyEmployee">{{ t('contactsSecurityButton') }}</button>
             <div
                 v-if="verificationResult"
                 class="verification-result"
@@ -72,13 +60,10 @@
       <section class="bottom-box fade-up delay-4">
         <div class="support-box">
           <div>
-            <h2>Нужна помощь?</h2>
-            <p>
-              Мы всегда готовы помочь вам
-              разобраться с платформой SkinTick.
-            </p>
+            <h2>{{ t('contactsHelpTitle') }}</h2>
+            <p>{{ t('contactsHelpDesc') }}</p>
           </div>
-          <button @click="showSupportModal = true">Написать в поддержку</button>
+          <button @click="showSupportModal = true">{{ t('contactsHelpButton') }}</button>
         </div>
       </section>
     </main>
@@ -87,53 +72,65 @@
       <div class="footer-container">
         <div class="footer-brand">
           <img src="/logo.svg" alt="SkinTick">
-          <p>
-            Актуальные цены, графики
-            и аналитика рынка CS2
-            в реальном времени
-          </p>
+          <p>{{ t('footerDesc') }}</p>
           <div class="footer-socials">
-            <a href="https://www.tiktok.com/@lolke17"><img src="/tiktok.svg" alt=""></a>
-            <a href="https://www.youtube.com/@lol-iz1rs"><img src="/youtube.svg" alt=""></a>
-            <a href="https://vk.com/kripo43k"><img src="/vk.svg" alt=""></a>
-            <a href="https://t.me/invo_bankai"><img src="/tg.svg" alt=""></a>
+            <a href="https://www.tiktok.com/@lolke17">
+              <img src="/tiktok.svg" alt="">
+            </a>
+            <a href="https://www.youtube.com/@lol-iz1rs">
+              <img src="/youtube.svg" alt="">
+            </a>
+            <a href="https://vk.com/kripo43k">
+              <img src="/vk.svg" alt="">
+            </a>
+            <a href="https://t.me/invo_bankai">
+              <img src="/tg.svg" alt="">
+            </a>
           </div>
         </div>
         <div class="footer-column">
-          <h4>МАРКЕТ</h4>
-          <a href="https://lis-skins.com/ru/cs2/">Продать скины CS2</a>
-          <a href="https://lis-skins.com/ru/market/cs2/">Купить скины CS2</a>
-          <a href="https://cs.money/ru/csgo/trade/">Обменять скины CS2</a>
+          <h4>{{ t('footerMarket') }}</h4>
+          <a href="https://lis-skins.com/ru/cs2/">{{ t('sellSkins') }}</a>
+          <a href="https://lis-skins.com/ru/market/cs2/">{{ t('buySkins') }}</a>
+          <a href="https://cs.money/ru/csgo/trade/">{{ t('tradeSkins') }}</a>
         </div>
         <div class="footer-column">
-          <h4>ПОМОЩЬ</h4>
-          <router-link to="/faq" class="nav-link" active-class="active-link">FAQ</router-link>
-          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">Как продать все скины CS2 в стиме сразу</a>
-          <a href="https://lis-skins.com/ru/how-it-works/">Как это работает</a>
-          <router-link to="/guarantees" class="nav-link" active-class="active-link">Гарантии</router-link>
-          <router-link to="/contacts" class="nav-link" active-class="active-link">Контакты</router-link>
+          <h4>{{ t('footerHelp') }}</h4>
+          <router-link to="/faq" class="nav-link" active-class="active-link">{{ t('faq') }}</router-link>
+          <a href="https://lis-skins.com/ru/prodat-veshi-stim/srazu-mnogo/">{{ t('sellAll') }}</a>
+          <a href="https://lis-skins.com/ru/how-it-works/">{{ t('howItWorks') }}</a>
+          <router-link to="/guarantees" class="nav-link" active-class="active-link">{{ t('guarantees') }}</router-link>
+          <router-link to="/contacts" class="nav-link" active-class="active-link">{{ t('contacts') }}</router-link>
         </div>
         <div class="footer-column">
-          <h4>ПОЛЕЗНОЕ</h4>
-          <a href="https://lis-skins.com/ru/blog/">Блог</a>
-          <a href="https://lis-skins.com/ru/reviews/">Отзывы о нас</a>
-          <a href="https://lis-skins.com/ru/oferta/">Пользовательское соглашение</a>
-          <a href="https://lis-skins.com/ru/privacy_policy/">Политика конфиденциальности</a>
-          <a href="https://lis-skins.com/ru/profile/api/">API</a>
+          <h4>{{ t('footerUseful') }}</h4>
+          <a href="https://lis-skins.com/ru/blog/">{{ t('blog') }}</a>
+          <a href="https://lis-skins.com/ru/reviews/">{{ t('reviews') }}</a>
+          <a href="https://lis-skins.com/ru/oferta/">{{ t('agreement') }}</a>
+          <a href="https://lis-skins.com/ru/privacy_policy/">{{ t('privacy') }}</a>
+          <a href="https://lis-skins.com/ru/profile/api/">{{ t('api') }}</a>
         </div>
         <div class="footer-right">
           <div class="footer-selects">
-            <button class="footer-select"><img src="/public/usd.svg" alt="usd">USD</button>
-            <button class="footer-select"><img src="/public/ru.svg" alt="ru">RU</button>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showCurrency = !showCurrency">
+                <img :src="currency === 'USD' ? '/usd.svg' : '/rub.svg'" alt="">{{ currency }}
+              </button>
+              <div v-if="showCurrency" class="currency-menu">
+                <button class="currency-item" @click="changeCurrency('USD')"><img src="/usd.svg">USD</button>
+                <button class="currency-item" @click="changeCurrency('RUB')"><img src="/rub.svg">RUB</button>
+              </div>
+            </div>
+            <div class="currency-dropdown">
+              <button class="footer-select" @click="showLanguage = !showLanguage"><img :src="language === 'RU' ? '/ru.svg' : '/en.svg'" alt="">{{ language }}</button>
+              <div v-if="showLanguage" class="currency-menu">
+                <button class="currency-item" @click="changeLanguage('RU')"><img src="/ru.svg">RU</button>
+                <button class="currency-item" @click="changeLanguage('EN')"><img src="/en.svg">EN</button>
+              </div>
+            </div>
           </div>
-          <p>
-            Веб-сайт SkinTick управляется компанией Ин-Гейм
-            Солюшн ЛТД.
-          </p>
-          <span>
-              © 2017-2026 SkinTick, все права защищены<br>
-              Powered by Steam. Not affiliated with Valve Corp.
-          </span>
+          <p>{{ t('footerCompany') }}</p>
+          <span>{{ t('footerRights') }}<br>{{ t('footerRights2') }}</span>
         </div>
       </div>
     </footer>
@@ -141,15 +138,35 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import SupportModal from '@/components/ui/SupportModal.vue'
+const { t, locale } = useI18n()
 const showSupportModal = ref(false)
 const employeeInput = ref('')
 const verificationResult = ref<null | {
   success: boolean
   message: string
 }>(null)
+const showCurrency = ref(false)
+const showLanguage = ref(false)
+const currency = ref(localStorage.getItem('currency') || 'USD')
+const language = computed(() => {
+  return locale.value === 'ru'
+      ? 'RU'
+      : 'EN'
+})
+const changeCurrency = (value: string) => {
+  currency.value = value
+  localStorage.setItem('currency', value)
+  showCurrency.value = false
+}
+const changeLanguage = (value: string) => {
+  locale.value = value.toLowerCase()
+  localStorage.setItem('lang', locale.value)
+  showLanguage.value = false
+}
 const employees = [
   {
     telegram: '@invo_bankai',
@@ -176,8 +193,8 @@ const employees = [
   },
   {
     telegram: '@gud0nk',
-    role: 'Сopywriter'
-  },
+    role: 'Copywriter'
+  }
 ]
 const verifyEmployee = () => {
   const value = employeeInput.value
@@ -186,7 +203,7 @@ const verifyEmployee = () => {
   if (!value) {
     verificationResult.value = {
       success: false,
-      message: 'Введите Telegram, Youtube или E-mail'
+      message: t('contactsVerifyEmpty')
     }
     return
   }
@@ -200,12 +217,12 @@ const verifyEmployee = () => {
   if (found) {
     verificationResult.value = {
       success: true,
-      message: `Сотрудник подтвержден (${found.role})`
+      message: `${t('contactsVerifySuccess')} (${found.role})`
     }
   } else {
     verificationResult.value = {
       success: false,
-      message: 'Сотрудник не найден'
+      message: t('contactsVerifyNotFound')
     }
   }
 }
@@ -396,18 +413,6 @@ const verifyEmployee = () => {
 @media(max-width: 900px) {
   .contacts-grid {
     grid-template-columns: 1fr;
-  }
-}
-@media(max-width: 768px) {
-  .contact-card {
-    padding: 28px;
-  }
-  .contact-card h2 {
-    font-size: 24px;
-  }
-  .contact-list a {
-    height: 50px;
-    font-size: 14px;
   }
 }
 .security-section {
@@ -753,5 +758,49 @@ const verifyEmployee = () => {
   .footer-selects {
     flex-wrap: wrap;
   }
+  .contact-card {
+    padding: 28px;
+  }
+  .contact-card h2 {
+    font-size: 24px;
+  }
+  .contact-list a {
+    height: 50px;
+    font-size: 14px;
+  }
+}
+.currency-dropdown {
+  position: relative;
+}
+.currency-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  background: #1b0b17;
+  border: 1px solid rgba(255,78,203,.3);
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 999;
+}
+.currency-item {
+  width: 100%;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+.currency-item img {
+  width: 18px;
+  height: 18px;
+}
+.currency-item:hover {
+  background: rgba(255,78,203,.15);
 }
 </style>
