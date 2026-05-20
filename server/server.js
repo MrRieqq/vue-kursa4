@@ -4,46 +4,34 @@ import axios from 'axios'
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-
 const app = express()
-
 app.use(cors())
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
 const jsonPath = path.join(
     __dirname,
     'data',
     'skins.json'
 )
-
 app.get('/api/skins', async (req, res) => {
-
     const currency =
         req.query.currency || 'USD'
-
     const lang =
         req.query.lang || 'ru'
-
     const updatedText =
         lang === 'ru'
             ? 'Только что'
             : 'Just now'
-
     try {
-
         const response = await axios.get(
             `https://market.csgo.com/api/v2/prices/${currency}.json`,
             {
                 timeout: 3500
             }
         )
-
         const items = Object.values(
             response.data.items
         )
-
         const WEAPONS = [
             'AK-47',
             'M4A4',
@@ -74,7 +62,6 @@ app.get('/api/skins', async (req, res) => {
             'SCAR-20',
             'G3SG1'
         ]
-
         const excluded = [
             'Sticker',
             'Agent',
@@ -86,52 +73,43 @@ app.get('/api/skins', async (req, res) => {
             'Souvenir Package',
             'Pin'
         ]
-
         const filtered = items.filter(item => {
-
             if (
                 !item.market_hash_name ||
                 !item.price
             ) {
                 return false
             }
-
             const isWeapon =
                 WEAPONS.some(weapon =>
                     item.market_hash_name.startsWith(
                         weapon
                     )
                 )
-
             const hasExcluded =
                 excluded.some(word =>
                     item.market_hash_name.includes(
                         word
                     )
                 )
-
             return (
                 isWeapon &&
                 !hasExcluded &&
                 item.market_hash_name.includes('|')
             )
         })
-
         const skins = filtered
             .sort(() => Math.random() - 0.5)
             .slice(0, 40)
             .map((item, index) => {
-
                 const price =
                     Number(item.price)
-
                 const median =
                     Number(
                         item.median_price ||
                         item.avg_price ||
                         item.price
                     )
-
                 const graph = [
                     median * 0.94,
                     median * 0.96,
@@ -143,13 +121,10 @@ app.get('/api/skins', async (req, res) => {
                 ].map(x =>
                     Number(x.toFixed(2))
                 )
-
                 const firstPrice =
                     graph[0]
-
                 const lastPrice =
                     graph[graph.length - 1]
-
                 const diff =
                     firstPrice > 0
                         ? (
@@ -159,90 +134,64 @@ app.get('/api/skins', async (req, res) => {
                             ) * 100
                         ).toFixed(2)
                         : '0.00'
-
                 const percent =
                     Number(diff) >= 0
                         ? `+${diff}%`
                         : `${diff}%`
-
                 const fullName =
                     item.market_hash_name
-
                 const weapon =
                     fullName
                         .split('|')[0]
                         ?.trim()
-
                 const skin =
                     fullName
                         .split('|')[1]
                         ?.split('(')[0]
                         ?.trim()
-
                 return {
                     id: index,
-
                     name: weapon,
-
                     skin: skin,
-
                     market_hash_name:
                     fullName,
-
                     quality:
                         getExterior(fullName),
-
                     exterior:
                         getExterior(fullName),
-
                     rarity: 'Covert',
-
                     rarityColor: '#eb4b4b',
-
                     price:
                         price.toFixed(2),
-
                     median_price:
                         median.toFixed(2),
-
                     suggested_price:
                         median.toFixed(2),
-
                     volume:
                         Number(
                             item.popularity_7d || 0
                         ),
-
                     image:
                         `https://cdn2.csgo.com/item/image/width=512/${encodeURIComponent(fullName)}.webp`,
-
                     graph,
-
                     percent,
-
                     inspect:
                         `https://market.csgo.com/en/${encodeURIComponent(fullName)}`
                 }
             })
-
         await fs.writeFile(
             jsonPath,
             JSON.stringify(skins, null, 2),
             'utf-8'
         )
-
         console.log(
             `DATA FROM API [${currency}]`
         )
-
         res.json(skins)
-
     } catch(error) {
-
         console.log(
             'API FAILED -> USING JSON'
         )
-
         try {
 
             const jsonData =

@@ -13,7 +13,7 @@
         <router-link to="/faq" class="nav-link" active-class="active-link">{{ t('headerFaq') }}</router-link>
       </nav>
       <div class="nav-right">
-        <input type="text" :placeholder="t('searchPlaceholder')" class="input-with-icon">
+        <input v-model="search" type="text" :placeholder="t('searchPlaceholder')" class="input-with-icon"/>
         <button class="login-btn" @click="openLogin">{{ t('login') }}</button>
         <button class="register-btn" @click="openRegister">{{ t('register') }}</button>
       </div>
@@ -163,13 +163,16 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AuthModal from '@/components/ui/AuthModal.vue'
+import { useSearch } from '@/stores/useSearch'
 const { t } = useI18n()
+const { search } = useSearch()
 const showModal = ref(false)
 const modalMode = ref('login')
 const openLogin = () => {
   modalMode.value = 'login'
   showModal.value = true
 }
+
 const openRegister = () => {
   modalMode.value = 'register'
   showModal.value = true
